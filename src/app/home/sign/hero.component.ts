@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
+import { SignupService } from '../../signup.service';
 
 
 @Component({
@@ -42,6 +43,13 @@ ngOnDestroy() {
 export class DialogContentExampleDialog {
   reader = new FileReader();
   url = '';
+  private firstName: string = '';
+  private lastName: string = '';
+  private email: string = '';
+  private gender: string = '';
+  private size: string = '';
+
+  constructor(public signupService: SignupService){}
 
   onSendFile(event) {
     console.log('Ya SAAALEH');
@@ -55,6 +63,29 @@ export class DialogContentExampleDialog {
       this.url = ev.target.result;
       console.log(this.url);
     };
+  }
+
+  onFirstName(event){
+    this.firstName = event.target.value;
+  }
+
+  onLastName(event: any){
+    this.firstName = event.target.value;
+    console.log(this.firstName);
+  }
+
+  onEmail(event: any){
+    this.firstName = event.target.value;
+    console.log(this.firstName);
+  }
+
+  onSignup(form: NgForm){
+    console.log(form.value);
+    this.signupService.signup({});
+  }
+
+  onGenderSelected(event: any){
+
   }
 }
 

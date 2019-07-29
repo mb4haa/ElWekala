@@ -11,19 +11,20 @@
       <mat-form-field>
       
               <!-- <label for="exampleFormControlInput1">First Name</label> -->
-              <input matInput type="text" name="myName" ngModel class="form-control" #nameInput="ngModel" id="exampleFormControlInput1" placeholder="First Name" required >
+              <input matInput type="text" (keyup)="onFirstName($event)" name="myName" ngModel class="form-control" #nameInput="ngModel" id="exampleFormControlInput1" placeholder="First Name" required >
               <mat-error *ngIf="nameInput.invalid">Please enter a valid name</mat-error>
         </mat-form-field>
         <br/>
         <mat-form-field>
           <!-- <label for="exampleFormControlInput1">Last Name</label> -->
-          <input matInput type="text" name="LastName" ngModel class="form-control" #LastInput="ngModel" id="exampleFormControlInput1" placeholder="Last Name" required >
+          <input matInput type="text" name="LastName" (keyup)="onLastName($event)" ngModel class="form-control" #LastInput="ngModel" id="exampleFormControlInput1" placeholder="Last Name" required >
           <mat-error *ngIf="LastInput.invalid">Field can't be empty</mat-error>
             </mat-form-field>
                 <br/>
               <mat-form-field>
                   <input matInput
                   type="email"
+                  (keyup)="onEmail($event)"
                   name="email"
                   ngModel
                   placeholder="E-MAIL" #emailInput="ngModel" required email>
@@ -31,13 +32,13 @@
                   </mat-form-field>
                   <br/>
                 <mat-form-field>
-                      <input name="password" ngModel type="password" matInput placeholder="Password" #passwordInput="ngModel" required >
+                      <input name="password" ngModel type="password" (keyup)="onPassword($event)" matInput placeholder="Password" #passwordInput="ngModel" required >
                     <mat-error *ngIf="passwordInput.invalid">Please enter a valid passwprd</mat-error>
                   </mat-form-field>
 
         <div class="form-group">
           <label for="exampleFormControlSelect1">Gender select</label>
-          <select class="form-control" id="exampleFormControlSelect1">
+          <select class="form-control" #mySelect (change)='onGenderSelected(mySelect.value)' id="exampleFormControlSelect1">
             <option>Male</option>
             <option>Female</option>
             <option>Other</option>
@@ -46,7 +47,7 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Size select</label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select class="form-control" #mySelect (change)='onSizeSelected(mySelect.value)' id="exampleFormControlSelect1">
               <option>XS</option>
               <option>Medium</option>
               <option>Large</option>
@@ -55,7 +56,7 @@
           </div>
         <div class="form-group">
           <label for="exampleFormControlSelect2">Shoe Size Select</label>
-          <select multiple class="form-control" id="exampleFormControlSelect2">
+          <select multiple class="form-control" #mySelect (change)='onShoeSizeSelected(mySelect.value)' id="exampleFormControlSelect2">
             <option>35</option>
             <option>36</option>
             <option>37</option>
@@ -75,27 +76,27 @@
       </form>
       <h2>Choose your favourite brands</h2>
       <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+          <input class="form-check-input" type="checkbox" (change)="checkValue(isChecked?'A':'B')" id="inlineCheckbox1" value="option1">
           <img  src='../../../assets/imgs/Nike.png' alt="image"class="form-check-label" for="inlineCheckbox1">
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+          <input class="form-check-input" type="checkbox" (change)="checkValue(isChecked?'A':'B')" id="inlineCheckbox2" value="option2">
           <img  src='../../../assets/imgs/FredPerry.png' alt="image"class="form-check-label" for="inlineCheckbox1">
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" >
+          <input class="form-check-input" type="checkbox" (change)="checkValue(isChecked?'A':'B')" id="inlineCheckbox3" value="option3" >
           <img  src='../../../assets/imgs/calvin.png' alt="image"class="form-check-label" for="inlineCheckbox1">
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+            <input class="form-check-input" type="checkbox" (change)="checkValue(isChecked?'A':'B')" id="inlineCheckbox1" value="option1">
             <img  src='../../../assets/imgs/concrete.png' alt="image"class="form-check-label" for="inlineCheckbox1">
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <input class="form-check-input" type="checkbox" (change)="checkValue(isChecked?'A':'B')" id="inlineCheckbox2" value="option2">
             <img  src='../../../assets/imgs/mobacco.png' alt="image"class="form-check-label" for="inlineCheckbox1">
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" >
+            <input class="form-check-input" type="checkbox" (change)="checkValue(isChecked?'A':'B')" id="inlineCheckbox3" value="option3" >
             <img  src='../../../assets/imgs/daly.png' alt="image"class="form-check-label" for="inlineCheckbox1">
           </div>
 </mat-dialog-content>
