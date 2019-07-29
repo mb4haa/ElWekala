@@ -21,6 +21,7 @@ router.post("/signup", (req,res,next) => {
         prefs: [],
         retweets: []
       });
+      console.log(user)
       user.save()
         .then(result => {
           res.status(201).json({
