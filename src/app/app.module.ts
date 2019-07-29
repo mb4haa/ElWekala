@@ -28,13 +28,18 @@ import { BrandComponent } from './home/brand/brand.component';
 import { footerComponent } from './footer/footer.component';
 import {DialogContentExampleDialog} from './home/sign/hero.component';
 import { hwhComponent } from './home/hwh/hwh.component';
+
+import { ProfileComponent } from './profile/profile.component';
+
 import { NewsComponent } from './news/news.component';
 import { itemCardComponent } from './news/itemCard/itemCard.component';
+
 
 @NgModule({
   declarations: [
     AppComponent, headerComponent, HomeComponent, HeroComponent, LoginComponent, HiwComponent, BrandComponent,
-    footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent
+    footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent,ProfileComponent
+
   ],
   imports: [
     BrowserModule,

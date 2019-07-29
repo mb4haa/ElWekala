@@ -1,15 +1,23 @@
 .hiw{
-  margin-left: 40%;
+  text-align: center;
+  padding: 5% 20%;
 }
 
 .btn-group{
-  margin-left: 25px;
+  width: 250px;
+  margin: 2% 0;
 }
 
-.seller{
-  margin-right: 100px;
+h2{
+  font-family: "buka";
+  font-size: 72pt;
 }
-
-.buyer{
-  margin-right: 100px;
+.btn-secondary{
+  color: #8b0e70;
+    background-color: transparent;
+    border-color: #8b0e70;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    border-bottom-width: medium;
 }

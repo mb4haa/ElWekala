@@ -7,7 +7,7 @@ body {
 
 mat-form-field,
 textarea{
-  width: 50%;
+  width: 100%;
 }
 
 mat-spinner{
@@ -15,14 +15,16 @@ mat-spinner{
 }
 
 .login {
-  /* margin:0 auto; */
-  margin-left: 70%;
+margin-left: 80%;
   max-width:300px;
 }
 .login-header {
-  color: blueviolet;
+  color: #8b0e70;
   text-align:center;
   font-size:300%;
 }
-
+button{
+  color: #8b0e70;
+  background-color: #8b0e70;
+}
 
