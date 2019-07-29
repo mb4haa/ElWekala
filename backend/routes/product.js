@@ -6,7 +6,7 @@ const User = require('../models/user');
 const checkAuth = require('../middleware/check-auth');
 
 
-router.post("/addProduct", checkAuth, (req,res,next) => {
+router.post("/addProduct", checkAuth, (req, res, next) => {
   const product = new Product({
     name: req.body.name,
     image: "Placeholder",
@@ -19,40 +19,41 @@ router.post("/addProduct", checkAuth, (req,res,next) => {
   });
 
   product.save().then(createdProd => {
-     if(createdProd){
-         console.log("Prod created and searching for user")
-  User.findById(req.body.uid,function(err,foundUser){
-    if(foundUser){
+    if (createdProd) {
+      console.log("Prod created and searching for user")
+      User.findById(req.body.uid, function (err, foundUser) {
+        if (foundUser) {
 
-        console.log("User found")
-        console.log(createdProd._id)
-        foundUser.listings.push((createdProd._id))
-        foundUser.save(function(err,user){
-            if(err){
-                return res.status(401).json({
-                    message: err
-                  });
+          console.log("User found")
+          console.log(createdProd._id)
+          foundUser.listings.push((createdProd._id))
+          foundUser.save(function (err, user) {
+            if (err) {
+              return res.status(401).json({
+                message: err
+              });
             }
-            else{
-                res.status(201).json({
-                    message: 'Prod added succesfully',
-                    prod: {createdProd,
-                      id: createdProd._id
-                    },
-                    user:user
-                });
+            else {
+              res.status(201).json({
+                message: 'Prod added succesfully',
+                prod: {
+                  createdProd,
+                  id: createdProd._id
+                },
+                user: user
+              });
             }
-        })
-    }
-    else{
-        return res.status(401).json({
+          })
+        }
+        else {
+          return res.status(401).json({
             message: err
           });
-    }
+        }
 
-})
-     }
-  }).catch( err => {
+      })
+    }
+  }).catch(err => {
     res.status(500).json({
       message: err
     });
@@ -196,6 +197,70 @@ router.patch("/shareProduct/:id", checkAuth, (req, res, next) => {
       return res.status(401).json({ message: "Login to be able to like" })
     }
   })
+});
+
+router.delete("/deleteProduct/:id", checkAuth, (req, res, next) => {
+
+  Product.findById(req.params.id).then(result => {
+    if (!result) {
+      return res.status(404).json({
+        message: 'No such product'
+      });
+    }
+    if (result.seller != req.body._id) {
+      return res.status(401).json({
+        message: 'Not your product bro'
+      });
+    }
+    User.findByIdAndUpdate(req.body._id, {
+      $pull: { listings: req.params.id }
+    }).then(result => {
+      console.log();
+    });
+    Product.findByIdAndRemove(req.params.id).then(result => {
+      if (!result) {
+        return res.status(404).json({
+          message: "Product not found"
+        });
+      }
+      return res.status(201).json({
+        message: "Product deleted"
+      });
+    });
+  });
+});
+
+router.patch("/editProduct/:id", checkAuth, (req, res, next) => {
+
+  Product.findById(req.params.id).then(result => {
+    if (!result) {
+      return res.status(404).json({
+        message: 'No such product'
+      });
+    }
+    if (result.seller != req.body._id) {
+      return res.status(401).json({
+        message: 'Not your product bro'
+      });
+    }
+    Product.findByIdAndUpdate(req.params.id, {
+      name: req.body.name,
+      price: req.body.price,
+      size: req.body.size,
+      category: req.body.category,
+      condition: req.body.condition,
+      tags: req.body.tags
+    }).then(result => {
+      if (!result) {
+        return res.status(404).json({
+          message: "Product not found"
+        });
+      }
+      return res.status(201).json({
+        message: "Product updated"
+      });
+    });
+  });
 });
 
 router.patch("/addToCart/:id", checkAuth, (req, res, next) => {
