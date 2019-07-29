@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const productSchema = mongoose.Schema({
- name: {type: String, required: true, unique: true},
+ name: {type: String, required: true, unique: false},
  image: {type: String, required: true},
  seller: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
  price: {type: Number, required: true},
