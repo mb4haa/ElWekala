@@ -1,14 +1,34 @@
 .card-header{
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
 }
-
 .card{
-    width: 35%;
-    margin-left: 30%;
-    margin-top: 2%;
+    width: 100%;
+    border: 1px solid rgb(139,14,112,0.25);
 }
-
 .icon{
-    margin: 2%;
+        margin: 3%;
+        width: 20%;
+        color: #8b0e70;
 }
+.card-img-top {
+    min-height: 300px;
+    margin: 1% 0;
+}
+.card-title{
+    margin: 1% 0;
+}
+.btn-primary{
+    color: #fff;
+    background-color: #8b0e70;
+    border-color: #8b0e70;
+}
+.icon-container{
+    text-align: center;
+}
+.buy-btn-container{
+    text-align: right;
+    margin: 1% 3%;
+
+}
+.controls{    border: 1px solid rgba(139, 14, 112, 0.25);}
