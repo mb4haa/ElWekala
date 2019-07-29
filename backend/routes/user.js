@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 const router = express.Router();
 
-router.post("/signup", (req,res,next) => {
+router.post("/signup", (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User ({
@@ -14,12 +14,12 @@ router.post("/signup", (req,res,next) => {
         lastName: req.body.lastName,
         email: req.body.email,
         password: hash,
-        following: [],
-        followers: [],
-        listings: [],
-        likes: [],
-        prefs: [],
-        retweets: []
+        following: {},
+        followers: {},
+        listings: {},
+        likes: {},
+        retweets: {},
+        prefs: {}
       });
       console.log(user)
       user.save()
@@ -31,15 +31,15 @@ router.post("/signup", (req,res,next) => {
         })
         .catch(err => {
           res.status(500).json({
-            message:err
+            message: err
           });
         });
     });
 });
 
-router.post('/login',(req,res,next) => {
+router.post('/login', (req, res, next) => {
   let fetchedUser;
-  User.findOne({ email: req.body.email})
+  User.findOne({ email: req.body.email })
     .then(user => {
       if(user == null){
           return res.status(401).json({
