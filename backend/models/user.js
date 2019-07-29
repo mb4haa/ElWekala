@@ -11,7 +11,8 @@ const userSchema = mongoose.Schema({
  listings: {type: Array, required:true},
  likes: {type: Array, required:true},
  retweets: {type: Array, required:true},
- prefs: {type: Array, required:true}
+ prefs: {type: Array, required:true},
+ cart: {type: Array,required:true}
 });
 
 userSchema.plugin(uniqueValidator);
