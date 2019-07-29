@@ -46,19 +46,19 @@ router.post('/login', (req, res, next) => {
           message: "No Such Email"
         });
       }
-      else {
-        fetchedUser = user;
-        passwordBoolean = bcrypt.compare(req.body.password, user.password, function (err, res2) {
-          if (res2) {
-            const token = jwt.sign(
-              { email: fetchedUser.email, userId: fetchedUser._id },
-              'secret_this_should_be_longer',
-              { expiresIn: "1h" }
+      else{
+      fetchedUser = user;
+      passwordBoolean =  bcrypt.compare(req.body.password, user.password ,function(err,res2){
+        if(res2){
+          const token = jwt.sign(
+            {email: fetchedUser.email, userId: fetchedUser._id},
+            'secret_this_should_be_longer',
+            {expiresIn:'4h'}
             );
             return res.status(200).json({
               token: token,
-              expiresIn: 3600,
-              id: fetchedUser._id
+              expiresIn: '4h',
+              id:fetchedUser._id
             });
           }
           else if (!res2) {

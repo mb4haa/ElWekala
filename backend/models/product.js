@@ -11,7 +11,8 @@ const productSchema = mongoose.Schema({
  category: {type: String , enum: ['TBD'], default:'TBD'},
  date: {type: Date, default: Date.now},
  lastShare: {type:Date , default:Date.now},
- tags: {type:Array , required:true}
+ tags: {type:Array , required:true},
+ likes: {type: Number , default:0}
 });
 
 productSchema.plugin(uniqueValidator);
