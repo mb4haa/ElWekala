@@ -3,19 +3,25 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
-
+const checkAuth = require('../middleware/check-auth');
 const router = express.Router();
 
-router.post("/signup", (req,res,next) => {
+router.post("/signup", (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
-      const user = new User ({
-        email: req.body.email,
+      const user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: hash
+        password: hash,
+        following: {},
+        followers: {},
+        listings: {},
+        likes: {},
+        retweets: {},
+        prefs: {}
       });
+      console.log(user)
       user.save()
         .then(result => {
           res.status(201).json({
@@ -25,46 +31,230 @@ router.post("/signup", (req,res,next) => {
         })
         .catch(err => {
           res.status(500).json({
-            message:'Invalid authentication credentials! check that email is unique'
+            message: err
           });
         });
     });
 });
 
-router.post('/login',(req,res,next) => {
+router.post('/login', (req, res, next) => {
   let fetchedUser;
-  User.findOne({ email: req.body.email})
+  User.findOne({ email: req.body.email })
     .then(user => {
-      if(!user){
+      if (user == null) {
         return res.status(401).json({
-          message: "Auth failed"
+          message: "No Such Email"
+        });
+      }
+      else{
+      fetchedUser = user;
+      passwordBoolean =  bcrypt.compare(req.body.password, user.password ,function(err,res2){
+        if(res2){
+          const token = jwt.sign(
+            {email: fetchedUser.email, userId: fetchedUser._id},
+            'secret_this_should_be_longer',
+            {expiresIn:'4h'}
+            );
+            return res.status(200).json({
+              token: token,
+              expiresIn: '4h',
+              id:fetchedUser._id
+            });
+          }
+          else if (!res2) {
+            return res.status(401).json({
+              message: "Invalid authentication credentials!(Password)"
+            });
+          }
+        });
+      }
+    })
+});
+
+router.get('/viewProfile', (req, res, next) => {
+  let fetchedUser;
+  User.findOne({ _id: req.body._id })
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({
+          message: 'No user Found'
         });
       }
       fetchedUser = user;
-      return bcrypt.compare(req.body.password, user.password);
-    })
-    .then(result => {
-      if(!result) {
-        return res.status(401).json({
-          message: "Auth failed"
-        });
-      }
-      const token = jwt.sign(
-      {email: fetchedUser.email, userId: fetchedUser._id},
-      'secret_this_should_be_longer',
-      {expiresIn: "1h"}
-      );
       res.status(200).json({
-        token: token,
-        expiresIn: 3600
+        user: fetchedUser,
+        message: "Found"
       });
-    })
-    .catch(err => {
-      console.log(err);
+    }).catch(err => {
       return res.status(401).json({
-      message: "Invalid authentication credentials!"
+        message: err
+      });
+    });
+});
+
+router.patch("/editProfile", checkAuth, (req, res, next) => {
+  User.findById(req.body._id).then(user => {
+    if (!user) {
+      return res.status(404).json({
+        err: null,
+        msg: 'Please Login.',
+        data: null
+      });
+    }
+    User.findByIdAndUpdate(
+      req.body._id,
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
+      }
+    ).then(result => {
+      res.status(201).json({
+        message: 'User Updated!'
+      });
+    }).catch(err => {
+      res.status(500).json({
+        message: err
+      });
     });
   });
+});
+
+router.patch("/follow", checkAuth, (req, res, next) => {
+  User.findById(req.body._id).then(user => {
+    if (!user) {
+      return res.status(404).json({
+        err: null,
+        msg: 'Wrong userId',
+        data: null
+      });
+    }
+    User.findByIdAndUpdate(
+      req.body._id,
+      {
+        $addToSet: { following: req.body._otherId }
+      }
+    ).then(result => {
+      res.status(201).json({
+        message: 'User Updated!'
+      });
+    }).catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
+  });
+  User.findById(req.body._otherId).then(user => {
+    if (!user) {
+      return res.status(404).json({
+        err: null,
+        msg: 'Wrong targetId',
+        data: null
+      });
+    }
+    User.findByIdAndUpdate(
+      req.body._otherId,
+      {
+        $addToSet: { followers: req.body._id }
+      }
+    ).then(result => {
+      res.status(201).json({
+        message: 'User Updated!'
+      });
+    }).catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
+  });
+});
+
+router.patch("/unfollow", checkAuth, (req, res, next) => {
+  User.findById(req.body._id).then(user => {
+    if (!user) {
+      return res.status(404).json({
+        err: null,
+        msg: 'Wrong userId',
+        data: null
+      });
+    }
+    User.findByIdAndUpdate(
+      req.body._id,
+      {
+        $pull: { following: req.body._otherId }
+      }
+    ).then(result => {
+      res.status(201).json({
+        message: 'User Updated!'
+      });
+    }).catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
+  });
+  User.findById(req.body._otherId).then(user => {
+    if (!user) {
+      return res.status(404).json({
+        err: null,
+        msg: 'Wrong targetId',
+        data: null
+      });
+    }
+    User.findByIdAndUpdate(
+      req.body._otherId,
+      {
+        $pull: { followers: req.body._id }
+      }
+    ).then(result => {
+      res.status(201).json({
+        message: 'User Updated!'
+      });
+    }).catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
+  });
+});
+
+router.get('/getFollowers', (req, res, next) => {
+  let fetchedUser;
+  User.findById(req.body._id)
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({
+          message: 'No user Found'
+        });
+      }
+      fetchedUser = user;
+      res.status(200).json({
+        followers: user.followers
+      });
+    }).catch(err => {
+      return res.status(401).json({
+        message: err
+      });
+    });
+});
+
+router.get('/getFollowing', (req, res, next) => {
+  let fetchedUser;
+  User.findById(req.body._id)
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({
+          message: 'No user Found'
+        });
+      }
+      fetchedUser = user;
+      res.status(200).json({
+        following: user.following
+      });
+    }).catch(err => {
+      return res.status(401).json({
+        message: err
+      });
+    });
 });
 
 module.exports = router
