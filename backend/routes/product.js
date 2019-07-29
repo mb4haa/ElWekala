@@ -45,33 +45,6 @@ router.get('/getProducts', (req, res, next) => {
   })
 });
 
-router.post("/addProduct", checkAuth, (req,res,next) => {
-    console.log(req.body);
-    const product = new Product({
-      name: req.body.name,
-      image: "Placeholder",
-      seller: req.body.uid,
-      price: req.body.price,
-      size: req.body.size,
-      condition: req.body.condition,
-      category: req.body.category,
-      tags: req.body.tags
-    });
-  
-    product.save().then(createdProd => {
-        res.status(201).json({
-        message: 'Prod added succesfully',
-        prod: {createdProd,
-          id: createdProd._id
-        }
-    });
-    }).catch( err => {
-      res.status(500).json({
-        message: err
-      });
-    });
-  });
-
   router.patch("/likeProduct/:id", checkAuth, (req,res,next) => {
     prodId = req.params.id
     myId = req.body.uid

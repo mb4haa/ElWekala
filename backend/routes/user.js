@@ -283,4 +283,43 @@ router.get('/viewLikes', (req, res, next) => {
   })
 });
 
+router.get('/viewPrefs', (req, res, next) => {
+  User.findById(req.body._id).then(user => {
+    if(!user){
+      return res.status(404).json({
+        message: 'No users Found'
+      })
+    }
+    res.status(200).json({
+      prefs: user.prefs
+    });
+  })
+});
+
+router.get('/viewReshares', (req, res, next) => {
+  User.findById(req.body._id).then(user => {
+    if(!user){
+      return res.status(404).json({
+        message: 'No users Found'
+      })
+    }
+    res.status(200).json({
+      reshares: user.retweets
+    });
+  })
+});
+
+router.get('/viewListings', (req, res, next) => {
+  User.findById(req.body._id).then(user => {
+    if(!user){
+      return res.status(404).json({
+        message: 'No users Found'
+      })
+    }
+    res.status(200).json({
+      listings: user.listings
+    });
+  })
+});
+
 module.exports = router
