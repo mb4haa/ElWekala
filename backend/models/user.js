@@ -9,6 +9,7 @@ const userSchema = mongoose.Schema({
  following: {type: Array, required:true },
  followers: {type: Array, required:true},
  listings: {type: Array, required:true},
+ likes: {type: Array, required:true},
  retweets: {type: Array, required:true},
  prefs: {type: Array, required:true},
 });
