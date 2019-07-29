@@ -71,7 +71,6 @@ router.get('/getProducts', (req, res, next) => {
   })
 });
 
-
   router.patch("/likeProduct/:id", checkAuth, (req,res,next) => {
     prodId = req.params.id
     myId = req.body.uid
