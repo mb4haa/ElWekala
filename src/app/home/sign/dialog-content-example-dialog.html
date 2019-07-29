@@ -4,12 +4,12 @@
         <div class="form-group">
           <label for="exampleFormControlFile1">Choose Profile Picture</label>
                   <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="onSendFile($event)" style="margin:0 auto;" /><br/>
-                  <img  [src]='url' alt="image" width='20%' height="20%">
+                  <img  [src]='url' alt="" width='20%' height="20%">
         </div>
       </form>
     <form name='myForm'>
       <mat-form-field>
-          
+      
               <!-- <label for="exampleFormControlInput1">First Name</label> -->
               <input matInput type="text" name="myName" ngModel class="form-control" #nameInput="ngModel" id="exampleFormControlInput1" placeholder="First Name" required >
               <mat-error *ngIf="nameInput.invalid">Please enter a valid name</mat-error>
@@ -18,7 +18,7 @@
         <mat-form-field>
           <!-- <label for="exampleFormControlInput1">Last Name</label> -->
           <input matInput type="text" name="LastName" ngModel class="form-control" #LastInput="ngModel" id="exampleFormControlInput1" placeholder="Last Name" required >
-          <mat-error *ngIf="LastInput.invalid">Please enter a valid name</mat-error>
+          <mat-error *ngIf="LastInput.invalid">Field can't be empty</mat-error>
             </mat-form-field>
                 <br/>
               <mat-form-field>
@@ -34,7 +34,7 @@
                       <input name="password" ngModel type="password" matInput placeholder="Password" #passwordInput="ngModel" required >
                     <mat-error *ngIf="passwordInput.invalid">Please enter a valid passwprd</mat-error>
                   </mat-form-field>
-                  
+
         <div class="form-group">
           <label for="exampleFormControlSelect1">Gender select</label>
           <select class="form-control" id="exampleFormControlSelect1">

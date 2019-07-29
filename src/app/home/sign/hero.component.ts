@@ -36,6 +36,7 @@ ngOnDestroy() {
   // tslint:disable-next-line:component-selector
   selector: 'dialog-content-example-dialog',
   templateUrl: 'dialog-content-example-dialog.html',
+  styleUrls: ['./hero.component.scss']
 })
 // tslint:disable-next-line:component-class-suffix
 export class DialogContentExampleDialog {
