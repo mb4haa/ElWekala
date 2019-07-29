@@ -77,26 +77,68 @@ router.post("/addProduct", checkAuth, (req,res,next) => {
                         Product.findById(prodId,function(err,likedProd){
                             console.log(likedProd)
                             if(likedProd){
-                                console.log(likedProd.likes)
-                                console.log(typeof(likedProd.likes))
                                 likedProd.likes = likedProd.likes + 1
                                 likedProd.save(function(err){
                                     if(err){
                                         return res.status(401).json({message:err})
                                     }else{
-                                        console.log("Ana hena")
                                         return res.status(200).json({message:"Product updated"})
                                     }
                                 })
                             }
                             else{
-                                console.log("Error no prod")
                                 return res.status(401).json({message:err})
                             }
                         })
                     }
                 })
 
+            }
+        }
+        else{
+            return res.status(401).json({message:"Login to be able to like"})
+        }
+    })
+ 
+
+  });
+
+  router.patch("/unlikeProduct/:id", checkAuth, (req,res,next) => {
+    prodId = req.params.id
+    myId = req.body.uid
+    User.findById(myId,function(err,MyUser){
+        if(MyUser){
+            if(MyUser.likes.includes(prodId)){
+                index = MyUser.likes.indexOf(prodId)
+                if(index >-1){
+                    MyUser.likes.splice(index,1)
+                    MyUser.save(function(err){
+                        if(err){
+                            return res.status(401).json({message:err})
+                        }
+                        else{
+                            Product.findById(prodId,function(err,likedProd){
+                                if(likedProd){
+                                    console.log(likedProd)
+                                    likedProd.likes = likedProd.likes - 1
+                                    likedProd.save(function(err){
+                                        if(err){
+                                            return res.status(401).json({message:err})
+                                        }else{
+                                            return res.status(200).json({message:"Product updated"})
+                                        }
+                                    })
+                                }
+                                else{
+                                    return res.status(401).json({message:err})
+                                }
+                            })
+                        }
+                    })
+                }
+            }
+            else{
+                return res.status(401).json({message:"Can't unlike without liking"})
             }
         }
         else{
