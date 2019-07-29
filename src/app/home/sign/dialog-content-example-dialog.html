@@ -11,7 +11,7 @@
       <mat-form-field>
       
               <!-- <label for="exampleFormControlInput1">First Name</label> -->
-              <input matInput type="text" name="myName" ngModel class="form-control" #nameInput="ngModel" id="exampleFormControlInput1" placeholder="First Name" required >
+              <input matInput type="text" name="myName" ngModel class="form-control" #nameInput="ngModel" id="exampleFormControlInput1" placeholder="First Name" required >{{name}}
               <mat-error *ngIf="nameInput.invalid">Please enter a valid name</mat-error>
         </mat-form-field>
         <br/>
