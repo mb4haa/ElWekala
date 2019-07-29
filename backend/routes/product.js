@@ -5,8 +5,8 @@ const Product = require('../models/product');
 const User = require('../models/user');
 const checkAuth = require('../middleware/check-auth');
 
-router.post("/addProduct", checkAuth, (req, res, next) => {
-  console.log(req.body);
+
+router.post("/addProduct", checkAuth, (req,res,next) => {
   const product = new Product({
     name: req.body.name,
     image: "Placeholder",
@@ -19,14 +19,40 @@ router.post("/addProduct", checkAuth, (req, res, next) => {
   });
 
   product.save().then(createdProd => {
-    res.status(201).json({
-      message: 'Prod added succesfully',
-      prod: {
-        createdProd,
-        id: createdProd._id
-      }
-    });
-  }).catch(err => {
+     if(createdProd){
+         console.log("Prod created and searching for user")
+  User.findById(req.body.uid,function(err,foundUser){
+    if(foundUser){
+
+        console.log("User found")
+        console.log(createdProd._id)
+        foundUser.listings.push((createdProd._id))
+        foundUser.save(function(err,user){
+            if(err){
+                return res.status(401).json({
+                    message: err
+                  });
+            }
+            else{
+                res.status(201).json({
+                    message: 'Prod added succesfully',
+                    prod: {createdProd,
+                      id: createdProd._id
+                    },
+                    user:user
+                });
+            }
+        })
+    }
+    else{
+        return res.status(401).json({
+            message: err
+          });
+    }
+
+})
+     }
+  }).catch( err => {
     res.status(500).json({
       message: err
     });
@@ -171,7 +197,6 @@ router.patch("/shareProduct/:id", checkAuth, (req, res, next) => {
     }
   })
 });
-
 
 
 module.exports = router;
