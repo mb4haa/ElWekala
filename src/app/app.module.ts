@@ -15,7 +15,8 @@ import { MatInputModule,
   MatButtonToggleModule,
   MatDialogTitle,
   MatButton,
-  MatDialogModule} from '@angular/material';
+  MatDialogModule,
+  MatIconModule} from '@angular/material';
 import {headerComponent} from './header/header.component';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,12 +28,18 @@ import { BrandComponent } from './home/brand/brand.component';
 import { footerComponent } from './footer/footer.component';
 import {DialogContentExampleDialog} from './home/sign/hero.component';
 import { hwhComponent } from './home/hwh/hwh.component';
+
 import { ProfileComponent } from './profile/profile.component';
+
+import { NewsComponent } from './news/news.component';
+import { itemCardComponent } from './news/itemCard/itemCard.component';
+
 
 @NgModule({
   declarations: [
     AppComponent, headerComponent, HomeComponent, HeroComponent, LoginComponent, HiwComponent, BrandComponent,
-    footerComponent, DialogContentExampleDialog, hwhComponent, ProfileComponent
+    footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent,ProfileComponent
+
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatToolbarModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
-
+    MatIconModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatPaginatorModule,
