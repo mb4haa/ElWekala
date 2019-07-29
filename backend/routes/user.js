@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
-
+const checkAuth = require('../middleware/check-auth');
 const router = express.Router();
 
 router.post("/signup", (req, res, next) => {
@@ -92,7 +92,7 @@ router.get('/viewProfile', (req, res, next) => {
     });
 });
 
-router.patch("/editProfile", (req, res, next) => {
+router.patch("/editProfile", checkAuth, (req, res, next) => {
   User.findById(req.body._id).then(user => {
     if (!user) {
       return res.status(404).json({
@@ -101,7 +101,6 @@ router.patch("/editProfile", (req, res, next) => {
         data: null
       });
     }
-    console.log('hoba');
     User.findByIdAndUpdate(
       req.body._id,
       {
@@ -110,8 +109,7 @@ router.patch("/editProfile", (req, res, next) => {
       }
     ).then(result => {
       res.status(201).json({
-        message: 'User Created!',
-        result: result
+        message: 'User Updated!'
       });
     }).catch(err => {
       res.status(500).json({
@@ -119,6 +117,144 @@ router.patch("/editProfile", (req, res, next) => {
       });
     });
   });
+});
+
+router.patch("/follow", checkAuth, (req, res, next) => {
+  User.findById(req.body._id).then(user => {
+    if (!user) {
+      return res.status(404).json({
+        err: null,
+        msg: 'Wrong userId',
+        data: null
+      });
+    }
+    User.findByIdAndUpdate(
+      req.body._id,
+      {
+        $addToSet: { following: req.body._otherId }
+      }
+    ).then(result => {
+      res.status(201).json({
+        message: 'User Updated!'
+      });
+    }).catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
+  });
+  User.findById(req.body._otherId).then(user => {
+    if (!user) {
+      return res.status(404).json({
+        err: null,
+        msg: 'Wrong targetId',
+        data: null
+      });
+    }
+    User.findByIdAndUpdate(
+      req.body._otherId,
+      {
+        $addToSet: { followers: req.body._id }
+      }
+    ).then(result => {
+      res.status(201).json({
+        message: 'User Updated!'
+      });
+    }).catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
+  });
+});
+
+router.patch("/unfollow", checkAuth, (req, res, next) => {
+  User.findById(req.body._id).then(user => {
+    if (!user) {
+      return res.status(404).json({
+        err: null,
+        msg: 'Wrong userId',
+        data: null
+      });
+    }
+    User.findByIdAndUpdate(
+      req.body._id,
+      {
+        $pull: { following: req.body._otherId }
+      }
+    ).then(result => {
+      res.status(201).json({
+        message: 'User Updated!'
+      });
+    }).catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
+  });
+  User.findById(req.body._otherId).then(user => {
+    if (!user) {
+      return res.status(404).json({
+        err: null,
+        msg: 'Wrong targetId',
+        data: null
+      });
+    }
+    User.findByIdAndUpdate(
+      req.body._otherId,
+      {
+        $pull: { followers: req.body._id }
+      }
+    ).then(result => {
+      res.status(201).json({
+        message: 'User Updated!'
+      });
+    }).catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
+  });
+});
+
+router.get('/getFollowers', (req, res, next) => {
+  let fetchedUser;
+  User.findById(req.body._id)
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({
+          message: 'No user Found'
+        });
+      }
+      fetchedUser = user;
+      res.status(200).json({
+        followers: user.followers
+      });
+    }).catch(err => {
+      return res.status(401).json({
+        message: err
+      });
+    });
+});
+
+router.get('/getFollowing', (req, res, next) => {
+  let fetchedUser;
+  User.findById(req.body._id)
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({
+          message: 'No user Found'
+        });
+      }
+      fetchedUser = user;
+      res.status(200).json({
+        following: user.following
+      });
+    }).catch(err => {
+      return res.status(401).json({
+        message: err
+      });
+    });
 });
 
 module.exports = router
