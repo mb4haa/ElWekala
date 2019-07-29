@@ -31,5 +31,18 @@ router.post("/addProduct", checkAuth, (req,res,next) => {
   });
 });
 
+router.get('/getProducts', (req, res, next) => {
+  Product.find().then(products => {
+    if(!products){
+      return res.status(404).json({
+        message: 'No products Found'
+      })
+    }
+    res.status(200).json({
+      products: products
+    });
+  })
+});
+
 
 module.exports = router;
