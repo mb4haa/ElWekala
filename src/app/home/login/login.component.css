@@ -1,0 +1,28 @@
+body {
+  background:url('http://cdn.wallpapersafari.com/13/6/Mpsg2b.jpg');
+  margin:0px;
+  font-family: 'Ubuntu', sans-serif;
+	background-size: 50% 50%;
+}
+
+mat-form-field,
+textarea{
+  width: 50%;
+}
+
+mat-spinner{
+  margin: auto;
+}
+
+.login {
+  /* margin:0 auto; */
+  margin-left: 70%;
+  max-width:300px;
+}
+.login-header {
+  color: blueviolet;
+  text-align:center;
+  font-size:300%;
+}
+
+
