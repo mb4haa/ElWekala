@@ -10,11 +10,16 @@ router.post("/signup", (req,res,next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User ({
-        email: req.body.email,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: hash
+        password: hash,
+        following: [],
+        followers: [],
+        listings: [],
+        likes: [],
+        prefs: [],
+        retweets: []
       });
       user.save()
         .then(result => {
@@ -25,7 +30,7 @@ router.post("/signup", (req,res,next) => {
         })
         .catch(err => {
           res.status(500).json({
-            message:'Invalid authentication credentials! check that email is unique'
+            message:err
           });
         });
     });
