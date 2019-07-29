@@ -27,11 +27,12 @@ import { BrandComponent } from './home/brand/brand.component';
 import { footerComponent } from './footer/footer.component';
 import {DialogContentExampleDialog} from './home/sign/hero.component';
 import { hwhComponent } from './home/hwh/hwh.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent, headerComponent, HomeComponent, HeroComponent, LoginComponent, HiwComponent, BrandComponent,
-    footerComponent, DialogContentExampleDialog, hwhComponent
+    footerComponent, DialogContentExampleDialog, hwhComponent, ProfileComponent
   ],
   imports: [
     BrowserModule,

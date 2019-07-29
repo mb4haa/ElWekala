@@ -1,6 +1,6 @@
 a {
   text-decoration: none;
-  color: purple;
+  color: #8b0e70;
 }
 
 ul{
@@ -15,5 +15,20 @@ ul{
 }
 
 .logoH{
- margin-bottom: 1%;
+    display: block;
+    padding: 5px;
+    height: 100%;
+    width: auto;
+}
+.logoH img{
+  vertical-align: middle;
+  border-style: none;
+  height: auto;
+  width: 95%;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 75px;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+  padding: 0 2%;
 }
