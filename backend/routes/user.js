@@ -53,11 +53,11 @@ router.post('/login', (req, res, next) => {
           const token = jwt.sign(
             {email: fetchedUser.email, userId: fetchedUser._id},
             'secret_this_should_be_longer',
-            {expiresIn: "1h"}
+            {expiresIn:'4h'}
             );
             return res.status(200).json({
               token: token,
-              expiresIn: 3600,
+              expiresIn: '4h',
               id:fetchedUser._id
             });
         }
