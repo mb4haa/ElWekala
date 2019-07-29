@@ -15,7 +15,7 @@ router.post("/addProduct", checkAuth, (req, res, next) => {
     size: req.body.size,
     condition: req.body.condition,
     category: req.body.category,
-    tags: req.body.tags
+    tags: req.body.tags.split(',')
   });
 
   product.save().then(createdProd => {
