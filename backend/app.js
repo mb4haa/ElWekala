@@ -9,6 +9,7 @@ const http = require ('http');
 const postRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
 const prodrRoutes = require('./routes/product');
+const filterRouter = require('./routes/filters');
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use((req,res,next) => {
 app.use('/api/posts',postRoutes);
 app.use('/api/user',userRoutes);
 app.use('/api/product',prodrRoutes);
+app.use('/api/filter', filterRouter);
 // app.use('/api/user',signalRoutes);
 // --------------------------SIGNALING--------------------------------------------------------------
 
