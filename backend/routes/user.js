@@ -75,9 +75,7 @@ router.get('/viewProfile', (req, res, next) => {
   let fetchedUser;
   User.findOne({ _id: req.body._id })
     .then(user => {
-      console.log('hoba');
       if (!user) {
-        console.log('hoba1');
         return res.status(401).json({
           message: 'No user Found'
         });
@@ -92,6 +90,35 @@ router.get('/viewProfile', (req, res, next) => {
         message: err
       });
     });
+});
+
+router.patch("/editProfile", (req, res, next) => {
+  User.findById(req.body._id).then(user => {
+    if (!user) {
+      return res.status(404).json({
+        err: null,
+        msg: 'Please Login.',
+        data: null
+      });
+    }
+    console.log('hoba');
+    User.findByIdAndUpdate(
+      req.body._id,
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
+      }
+    ).then(result => {
+      res.status(201).json({
+        message: 'User Created!',
+        result: result
+      });
+    }).catch(err => {
+      res.status(500).json({
+        message: err
+      });
+    });
+  });
 });
 
 module.exports = router
