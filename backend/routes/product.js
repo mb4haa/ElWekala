@@ -198,5 +198,59 @@ router.patch("/shareProduct/:id", checkAuth, (req, res, next) => {
   })
 });
 
+router.patch("/addToCart/:id", checkAuth, (req, res, next) => {
+    prodId = req.params.id
+    myId = req.body.uid
+    User.findById(myId, function (err, MyUser) {
+      if (MyUser) {
+        if(!MyUser.cart.includes(prodId)){
+            MyUser.cart.push(prodId)
+            MyUser.save(function(err,MyUser){
+                if(err){
+                return res.status(401).json({ message: err })
+                }
+                else{
+                return res.status(201).json({User:MyUser})
+                }
+            })
+        }
+        else{
+            return res.status(401).json({message:"Already In Cart"})
+        }
+      }
+      else {
+        return res.status(401).json({ message: "Login to be able to add to cart" })
+      }
+    })
+  });
+
+  router.patch("/removeFromCart/:id", checkAuth, (req, res, next) => {
+    prodId = req.params.id
+    myId = req.body.uid
+    User.findById(myId, function (err, MyUser) {
+      if (MyUser) {
+        if(MyUser.cart.includes(prodId)){
+            index = MyUser.cart.indexOf(prodId)
+            if(index > -1){
+                MyUser.cart.splice(index,1)
+            }
+            MyUser.save(function(err,MyUser){
+                if(err){
+                return res.status(401).json({ message: err })
+                }
+                else{
+                return res.status(201).json({User:MyUser})
+                }
+            })
+        }
+        else{
+            return res.status(401).json({message:"Not In Cart"})
+        }
+      }
+      else {
+        return res.status(401).json({ message: "Login to be able to un-cart" })
+      }
+    })
+  });
 
 module.exports = router;
