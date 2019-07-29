@@ -14,12 +14,12 @@ router.post("/signup", (req, res, next) => {
         lastName: req.body.lastName,
         email: req.body.email,
         password: hash,
-        following: {},
-        followers: {},
-        listings: {},
-        likes: {},
-        retweets: {},
-        prefs: {}
+        following: [],
+        followers: [],
+        listings: [],
+        likes: [],
+        retweets: [],
+        prefs: []
       });
       console.log(user)
       user.save()
