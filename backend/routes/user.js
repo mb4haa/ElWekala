@@ -46,19 +46,19 @@ router.post('/login', (req, res, next) => {
           message: "No Such Email"
         });
       }
-      else{
-      fetchedUser = user;
-      passwordBoolean =  bcrypt.compare(req.body.password, user.password ,function(err,res2){
-        if(res2){
-          const token = jwt.sign(
-            {email: fetchedUser.email, userId: fetchedUser._id},
-            'secret_this_should_be_longer',
-            {expiresIn:'4h'}
+      else {
+        fetchedUser = user;
+        passwordBoolean = bcrypt.compare(req.body.password, user.password, function (err, res2) {
+          if (res2) {
+            const token = jwt.sign(
+              { email: fetchedUser.email, userId: fetchedUser._id },
+              'secret_this_should_be_longer',
+              { expiresIn: '4h' }
             );
             return res.status(200).json({
               token: token,
               expiresIn: '4h',
-              id:fetchedUser._id
+              id: fetchedUser._id
             });
           }
           else if (!res2) {
@@ -259,7 +259,7 @@ router.get('/getFollowing', (req, res, next) => {
 
 router.get('/getUsers', (req, res, next) => {
   User.find().then(users => {
-    if(!users){
+    if (!users) {
       return res.status(404).json({
         message: 'No users Found'
       })
@@ -272,7 +272,7 @@ router.get('/getUsers', (req, res, next) => {
 
 router.get('/viewLikes', (req, res, next) => {
   User.findById(req.body._id).then(user => {
-    if(!user){
+    if (!user) {
       return res.status(404).json({
         message: 'No users Found'
       })
@@ -285,7 +285,7 @@ router.get('/viewLikes', (req, res, next) => {
 
 router.get('/viewPrefs', (req, res, next) => {
   User.findById(req.body._id).then(user => {
-    if(!user){
+    if (!user) {
       return res.status(404).json({
         message: 'No users Found'
       })
@@ -298,7 +298,7 @@ router.get('/viewPrefs', (req, res, next) => {
 
 router.get('/viewReshares', (req, res, next) => {
   User.findById(req.body._id).then(user => {
-    if(!user){
+    if (!user) {
       return res.status(404).json({
         message: 'No users Found'
       })
@@ -311,7 +311,7 @@ router.get('/viewReshares', (req, res, next) => {
 
 router.get('/viewListings', (req, res, next) => {
   User.findById(req.body._id).then(user => {
-    if(!user){
+    if (!user) {
       return res.status(404).json({
         message: 'No users Found'
       })

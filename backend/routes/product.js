@@ -5,6 +5,7 @@ const Product = require('../models/product');
 const User = require('../models/user');
 const checkAuth = require('../middleware/check-auth');
 
+
 router.post("/addProduct", checkAuth, (req,res,next) => {
   const product = new Product({
     name: req.body.name,
@@ -60,7 +61,7 @@ router.post("/addProduct", checkAuth, (req,res,next) => {
 
 router.get('/getProducts', (req, res, next) => {
   Product.find().then(products => {
-    if(!products){
+    if (!products) {
       return res.status(404).json({
         message: 'No products Found'
       })
@@ -71,133 +72,131 @@ router.get('/getProducts', (req, res, next) => {
   })
 });
 
-  router.patch("/likeProduct/:id", checkAuth, (req,res,next) => {
-    prodId = req.params.id
-    myId = req.body.uid
-    User.findById(myId,function(err,MyUser){
-        if(MyUser){
-            if(MyUser.likes.includes(prodId)){
-                return res.status(401).json({message:"Already liked"})
-            }
-            else{
-                MyUser.likes.push(prodId)
-                MyUser.save(function(err){
-                    if(err){
-                        return res.status(401).json({message:err})
-                    }
-                    else{
-                        Product.findById(prodId,function(err,likedProd){
-                            console.log(likedProd)
-                            if(likedProd){
-                                likedProd.likes = likedProd.likes + 1
-                                likedProd.save(function(err){
-                                    if(err){
-                                        return res.status(401).json({message:err})
-                                    }else{
-                                        return res.status(200).json({message:"Product updated"})
-                                    }
-                                })
-                            }
-                            else{
-                                return res.status(401).json({message:err})
-                            }
-                        })
-                    }
+router.patch("/likeProduct/:id", checkAuth, (req, res, next) => {
+  prodId = req.params.id
+  myId = req.body.uid
+  User.findById(myId, function (err, MyUser) {
+    if (MyUser) {
+      if (MyUser.likes.includes(prodId)) {
+        return res.status(401).json({ message: "Already liked" })
+      }
+      else {
+        MyUser.likes.push(prodId)
+        MyUser.save(function (err) {
+          if (err) {
+            return res.status(401).json({ message: err })
+          }
+          else {
+            Product.findById(prodId, function (err, likedProd) {
+              console.log(likedProd)
+              if (likedProd) {
+                likedProd.likes = likedProd.likes + 1
+                likedProd.save(function (err) {
+                  if (err) {
+                    return res.status(401).json({ message: err })
+                  } else {
+                    return res.status(200).json({ message: "Product updated" })
+                  }
                 })
+              }
+              else {
+                return res.status(401).json({ message: err })
+              }
+            })
+          }
+        })
 
+      }
+    }
+    else {
+      return res.status(401).json({ message: "Login to be able to like" })
+    }
+  })
+
+
+});
+
+router.patch("/unlikeProduct/:id", checkAuth, (req, res, next) => {
+  prodId = req.params.id
+  myId = req.body.uid
+  User.findById(myId, function (err, MyUser) {
+    if (MyUser) {
+      if (MyUser.likes.includes(prodId)) {
+        index = MyUser.likes.indexOf(prodId)
+        if (index > -1) {
+          MyUser.likes.splice(index, 1)
+          MyUser.save(function (err) {
+            if (err) {
+              return res.status(401).json({ message: err })
             }
-        }
-        else{
-            return res.status(401).json({message:"Login to be able to like"})
-        }
-    })
- 
-
-  });
-
-  router.patch("/unlikeProduct/:id", checkAuth, (req,res,next) => {
-    prodId = req.params.id
-    myId = req.body.uid
-    User.findById(myId,function(err,MyUser){
-        if(MyUser){
-            if(MyUser.likes.includes(prodId)){
-                index = MyUser.likes.indexOf(prodId)
-                if(index >-1){
-                    MyUser.likes.splice(index,1)
-                    MyUser.save(function(err){
-                        if(err){
-                            return res.status(401).json({message:err})
-                        }
-                        else{
-                            Product.findById(prodId,function(err,likedProd){
-                                if(likedProd){
-                                    console.log(likedProd)
-                                    likedProd.likes = likedProd.likes - 1
-                                    likedProd.save(function(err){
-                                        if(err){
-                                            return res.status(401).json({message:err})
-                                        }else{
-                                            return res.status(200).json({message:"Product updated"})
-                                        }
-                                    })
-                                }
-                                else{
-                                    return res.status(401).json({message:err})
-                                }
-                            })
-                        }
-                    })
+            else {
+              Product.findById(prodId, function (err, likedProd) {
+                if (likedProd) {
+                  console.log(likedProd)
+                  likedProd.likes = likedProd.likes - 1
+                  likedProd.save(function (err) {
+                    if (err) {
+                      return res.status(401).json({ message: err })
+                    } else {
+                      return res.status(200).json({ message: "Product updated" })
+                    }
+                  })
                 }
+                else {
+                  return res.status(401).json({ message: err })
+                }
+              })
             }
-            else{
-                return res.status(401).json({message:"Can't unlike without liking"})
+          })
+        }
+      }
+      else {
+        return res.status(401).json({ message: "Can't unlike without liking" })
+      }
+    }
+    else {
+      return res.status(401).json({ message: "Login to be able to like" })
+    }
+  })
+
+
+});
+
+router.patch("/shareProduct/:id", checkAuth, (req, res, next) => {
+  prodId = req.params.id
+  myId = req.body.uid
+  User.findById(myId, function (err, MyUser) {
+    if (MyUser) {
+      MyUser.retweets.push(prodId)
+      MyUser.save(function (err) {
+        if (err) {
+          return res.status(401).json({ message: err })
+        }
+        else {
+          Product.findById(prodId, function (err, likedProd) {
+            if (likedProd) {
+
+              likedProd.lastShare = Date.now()
+              likedProd.save(function (err) {
+                if (err) {
+                  return res.status(401).json({ message: err })
+                } else {
+                  return res.status(200).json({ message: "Product updated" })
+                }
+              })
             }
+            else {
+              return res.status(401).json({ message: err })
+            }
+          })
         }
-        else{
-            return res.status(401).json({message:"Login to be able to like"})
-        }
-    })
- 
-
-  });
-
-  router.patch("/shareProduct/:id", checkAuth, (req,res,next) => {
-    prodId = req.params.id
-    myId = req.body.uid
-    User.findById(myId,function(err,MyUser){
-        if(MyUser){
-                    MyUser.retweets.push(prodId)
-                    MyUser.save(function(err){
-                        if(err){
-                            return res.status(401).json({message:err})
-                        }
-                        else{
-                            Product.findById(prodId,function(err,likedProd){
-                                if(likedProd){
-                                    
-                                    likedProd.lastShare = Date.now()
-                                    likedProd.save(function(err){
-                                        if(err){
-                                            return res.status(401).json({message:err})
-                                        }else{
-                                            return res.status(200).json({message:"Product updated"})
-                                        }
-                                    })
-                                }
-                                else{
-                                    return res.status(401).json({message:err})
-                                }
-                            })
-                        }
-                    })
-                
-
-        }
-        else{
-            return res.status(401).json({message:"Login to be able to like"})
-        }
-    })
-  });
+      })
+    }
+    else {
+      return res.status(401).json({ message: "Login to be able to like" })
+    }
+  })
+});
 
 
 module.exports = router;
