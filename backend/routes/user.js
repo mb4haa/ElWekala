@@ -322,4 +322,47 @@ router.get('/viewListings', (req, res, next) => {
   })
 });
 
+router.patch('/setPrefs',checkAuth,(req,res,next) =>{
+  basePrefs = req.body.prefs
+  arr = basePrefs.split(",")
+  console.log(arr)
+  User.findById(req.body._id,function(err,foundUser){
+    if(err){
+      return res.status(401).json({message:err})
+    }
+    else{
+      console.log(foundUser)
+      arr.forEach(element => {
+        console.log(element)
+        if(foundUser.prefs == null){
+          foundUser.prefs = []
+        }
+        foundUser.prefs.push(element)
+      });
+      foundUser.save(function(err,user){
+        if(err){
+          return res.status(401).json({
+            message: 'No users Found'
+          })
+        }else{
+          return res.status(201).json({msg:user})
+        }
+      })
+    }
+  })
+})
+
+router.get('/getPrefs',(req,res,next) =>{
+  User.findById(req.body._id,function(err,foundUser){
+    if(err){
+      return res.status(401).json({message:err})
+    }
+    else{
+      console.log(foundUser.prefs)
+      return res.status(201).json({Prefs:foundUser.prefs})
+    }
+  })
+})
+
+
 module.exports = router
