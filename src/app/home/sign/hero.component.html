@@ -4,4 +4,15 @@
 <button type="button" class="btn btn-danger">Continue with google</button>
 </div>
 
+<form name="myForm">
+        <mat-form-field>
+                <input matInput
+                type="email"
+                name="email"
+                ngModel
+                placeholder="E-MAIL" #emailInput="ngModel" required email>
+                <mat-error *ngIf="emailInput.invalid">Please enter a valid email</mat-error>
+                </mat-form-field>
+        </form>
+
 
