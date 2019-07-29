@@ -149,5 +149,44 @@ router.post("/addProduct", checkAuth, (req,res,next) => {
 
   });
 
+  router.patch("/shareProduct/:id", checkAuth, (req,res,next) => {
+    prodId = req.params.id
+    myId = req.body.uid
+    User.findById(myId,function(err,MyUser){
+        if(MyUser){
+                    MyUser.retweets.push(prodId)
+                    MyUser.save(function(err){
+                        if(err){
+                            return res.status(401).json({message:err})
+                        }
+                        else{
+                            Product.findById(prodId,function(err,likedProd){
+                                if(likedProd){
+                                    
+                                    likedProd.lastShare = Date.now()
+                                    likedProd.save(function(err){
+                                        if(err){
+                                            return res.status(401).json({message:err})
+                                        }else{
+                                            return res.status(200).json({message:"Product updated"})
+                                        }
+                                    })
+                                }
+                                else{
+                                    return res.status(401).json({message:err})
+                                }
+                            })
+                        }
+                    })
+                
+
+        }
+        else{
+            return res.status(401).json({message:"Login to be able to like"})
+        }
+    })
+  });
+
+
 
 module.exports = router;
