@@ -61,8 +61,7 @@ router.post('/login', (req, res, next) => {
             return res.status(200).json({
               token: token,
               expiresIn: '4h',
-              id: fetchedUser._id,
-              user:fetchedUser
+              user: fetchedUser
             });
           }
           else if (!res2) {
@@ -75,7 +74,7 @@ router.post('/login', (req, res, next) => {
     })
 });
 
-router.get('/viewProfile', (req, res, next) => {
+router.patch('/viewProfile', (req, res, next) => {
   let fetchedUser;
   User.findOne({ _id: req.body._id })
     .then(user => {
@@ -221,7 +220,7 @@ router.patch("/unfollow", checkAuth, (req, res, next) => {
   });
 });
 
-router.get('/getFollowers', (req, res, next) => {
+router.patch('/getFollowers', (req, res, next) => {
   let fetchedUser;
   User.findById(req.body._id)
     .then(user => {
@@ -241,7 +240,7 @@ router.get('/getFollowers', (req, res, next) => {
     });
 });
 
-router.get('/getFollowing', (req, res, next) => {
+router.patch('/getFollowing', (req, res, next) => {
   let fetchedUser;
   User.findById(req.body._id)
     .then(user => {
@@ -274,7 +273,7 @@ router.get('/getUsers', (req, res, next) => {
   })
 });
 
-router.get('/viewLikes', (req, res, next) => {
+router.patch('/viewLikes', (req, res, next) => {
   User.findById(req.body._id).then(user => {
     if (!user) {
       return res.status(404).json({
@@ -287,7 +286,7 @@ router.get('/viewLikes', (req, res, next) => {
   })
 });
 
-router.get('/viewPrefs', (req, res, next) => {
+router.patch('/viewPrefs', (req, res, next) => {
   User.findById(req.body._id).then(user => {
     if (!user) {
       return res.status(404).json({
@@ -300,7 +299,7 @@ router.get('/viewPrefs', (req, res, next) => {
   })
 });
 
-router.get('/viewReshares', (req, res, next) => {
+router.patch('/viewReshares', (req, res, next) => {
   User.findById(req.body._id).then(user => {
     if (!user) {
       return res.status(404).json({
@@ -313,7 +312,7 @@ router.get('/viewReshares', (req, res, next) => {
   })
 });
 
-router.get('/viewListings', (req, res, next) => {
+router.patch('/viewListings', (req, res, next) => {
   User.findById(req.body._id).then(user => {
     if (!user) {
       return res.status(404).json({
@@ -356,7 +355,7 @@ router.patch('/setPrefs',checkAuth,(req,res,next) =>{
   })
 })
 
-router.get('/getPrefs',(req,res,next) =>{
+router.patch('/getPrefs',(req,res,next) =>{
   User.findById(req.body._id,function(err,foundUser){
     if(err){
       return res.status(401).json({message:err})

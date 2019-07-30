@@ -60,13 +60,15 @@ router.post("/addProduct", checkAuth, (req, res, next) => {
   });
 });
 
-router.get('/getProducts', (req, res, next) => {
+router.patch('/getProducts', (req, res, next) => {
+  page = req.body.pageNumber
   Product.find().then(products => {
     if (!products) {
       return res.status(404).json({
         message: 'No products Found'
       })
     }
+    products = products.slice((page*5),(page*5)+5)
     res.status(200).json({
       products: products
     });
@@ -316,6 +318,30 @@ router.patch("/addToCart/:id", checkAuth, (req, res, next) => {
         return res.status(401).json({ message: "Login to be able to un-cart" })
       }
     })
+  });
+
+  router.patch('/getListings', (req, res, err) => {
+    User.findById(req.body._id).then(user => {
+      if(!user){
+        return res.status(404).json({
+          message: "user not found"
+        });
+      }
+      else{
+        Product.find({seller: req.body._id}).then(products => {
+          if(!products){
+            return res.status(404).json({
+              message: 'No products'
+            });
+          }
+          else{
+            return res.status(201).json({
+              products: products
+            });
+          }
+        });
+      }
+    });
   });
 
 module.exports = router;

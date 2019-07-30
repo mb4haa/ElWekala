@@ -32,8 +32,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { NewsComponent } from './news/news.component';
 import { itemCardComponent } from './news/itemCard/itemCard.component';
 import { ProfileItemCardComponent } from './profile/profile-item-card/profile-item-card.component';
-import { SignupService } from './signup.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileService } from './profile.service';
+import { SignupService } from './signup.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -58,12 +60,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     MatDialogModule,
     HttpClientModule,
+    InfiniteScrollModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule
   ],
   entryComponents: [DialogContentExampleDialog],
-  providers: [SignupService],
+  providers: [SignupService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
