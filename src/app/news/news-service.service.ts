@@ -9,7 +9,7 @@ import {itemCardComponent} from './itemCard/itemCard.component';
 import {environment} from '../../environments/environment';
 import { Card } from './card.modal';
 
-const BACKEND_URL = environment.URL + 'product';
+const BACKEND_URL = environment.url + 'product';
 @Injectable({
   providedIn: 'root'
 })

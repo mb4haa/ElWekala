@@ -16,7 +16,7 @@ export class itemCardComponent implements OnInit, OnDestroy {
 
   cards: Card[] = [];
   cardSub = [1,2];
-  BACKEND_URL = environment.URL + 'product';
+  BACKEND_URL = environment.url + 'product';
   sum = 100;
   throttle = 300;
   scrollDistance = 1;
