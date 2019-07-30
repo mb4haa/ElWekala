@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadProfile(id: string) {
+    console.log(id)
     this.http.patch(environment.url + 'user/viewProfile', { _id: id }).subscribe(response => {
       this.firstName = response['user'].firstName;
       this.lastName = response['user'].lastName;

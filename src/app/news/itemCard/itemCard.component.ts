@@ -23,6 +23,7 @@ export class itemCardComponent implements OnInit, OnDestroy {
   scrollUpDistance = 2;
   direction = '';
   page = 0;
+  likes: any[] =[]
   
 
   constructor(private NewsService: NewsServiceService, private http: HttpClient) {}
@@ -32,11 +33,44 @@ export class itemCardComponent implements OnInit, OnDestroy {
     //   this.card = postData.posts;
     //   console.log("this.card.length");
     // } );
+    this.likes = (localStorage.getItem('likes').split(","))
+    console.log(typeof(this.likes))
     this.http.patch<{products: any}>(this.BACKEND_URL + '/getProducts', {pageNumber: this.page}).subscribe(res => {
       this.cards = res['products'];
      // console.log(this.cards);
     });
 
+  }
+  rate(pid: any){
+    let id = localStorage.getItem('uid')
+    this.http.patch<{}>(this.BACKEND_URL + '/likeProduct/'+pid, {token:localStorage.getItem('token'),uid:localStorage.getItem('uid')}).subscribe(res => {
+      if(res['message']=='Product updated'){
+        this.cards.forEach(element => {
+          if(element._id == pid){
+            element.likes+=1;
+          }
+        });
+        this.likes.push(pid)
+      }
+    });
+  }
+  unrate(pid: any){
+    let id = localStorage.getItem('uid')
+    this.http.patch<{}>(this.BACKEND_URL + '/unlikeProduct/'+pid, {token:localStorage.getItem('token'),uid:localStorage.getItem('uid')}).subscribe(res => {
+      if(res['message']=='Product updated'){
+        this.cards.forEach(element => {
+          if(element._id == pid){
+            element.likes-=1;
+          }
+        });
+        const x = this.likes.indexOf(pid)
+        this.likes.splice(x,1)
+      }
+    });
+  }
+  test(pid:any){
+    this.likes = (localStorage.getItem('likes').split(","))
+    console.log(this.likes)
   }
 
   onScrollDown(ev) {
