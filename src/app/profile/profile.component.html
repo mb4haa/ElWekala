@@ -1,68 +1,69 @@
 <div class="profile-section">
   <div class="container">
-        <header>
-          <i class="fa fa-bars" aria-hidden="true"></i>
-        </header>
-        <div>
-          <div class="row">
-            <div class="left col-lg-3">
-              <div class="photo-left">
-                <img class="photo" src="https://image.noelshack.com/fichiers/2017/38/2/1505775062-1505606859-portrait-1961529-960-720.jpg"/>
-                
-              </div>
-              <h4 class="name">First + Last Name</h4>
-              <div class="username">@username</div>
-              <div class="stats row">
-                <div class="stat col-xs-4" style="padding-right: 50px;">
-                  <div class="number-stat">3,619</div>
-                  <div class="desc-stat">Followers</div>
-                </div>
-                <div class="stat col-xs-4">
-                  <div class="number-stat">42</div>
-                  <div class="desc-stat">Following</div>
-                </div>
-                <div class="stat col-xs-4" style="padding-left: 50px;">
-                  <div class="number-stat">38</div>
-                  <div class="desc-stat">Listings</div>
-                </div>
-              </div>
-             
-              <div class="social">
-                <i class="fa fa-facebook-square" aria-hidden="true"></i>
-                <i class="fa fa-twitter-square" aria-hidden="true"></i>
-                <i class="fa fa-pinterest-square" aria-hidden="true"></i>
-                <i class="fa fa-tumblr-square" aria-hidden="true"></i>
-              </div>
+    <header>
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </header>
+    <div>
+      <div class="row">
+        <div class="left col-lg-3">
+          <div class="photo-left">
+            <img class="photo"
+              src="https://image.noelshack.com/fichiers/2017/38/2/1505775062-1505606859-portrait-1961529-960-720.jpg" />
+
+          </div>
+          <h4 class="name">{{firstName}} + {{lastName}}</h4>
+          <div class="username">{{email}}</div>
+          <div class="stats row">
+            <div class="stat col-xs-4" style="padding-right: 50px;">
+              <div class="number-stat">{{followers}}</div>
+              <div class="desc-stat">Followers</div>
             </div>
-            <div class="right col-lg-8">
-              <ul class="nav">
-                <li>Listings</li>
-                <li>Shares</li>
-                <li>Followers</li>
-                <li>Following</li>
-              </ul>
-              <span class="follow">Follow</span>
-              <div class="row gallery">
-                <div class="col-md-4">
-                  <app-profile-item-card></app-profile-item-card>
-                </div>
-                <div class="col-md-4">
-                    <app-profile-item-card></app-profile-item-card>
-                  </div>
-                <div class="col-md-4">
-                    <app-profile-item-card></app-profile-item-card>
-                  </div>
-                <div class="col-md-4">
-                    <app-profile-item-card></app-profile-item-card>
-                  </div>
-                <div class="col-md-4">
-                    <app-profile-item-card></app-profile-item-card>
-                  </div>
-                <div class="col-md-4">
-                    <app-profile-item-card></app-profile-item-card>
-                  </div>
-              </div>
+            <div class="stat col-xs-4">
+              <div class="number-stat">{{following}}</div>
+              <div class="desc-stat">Following</div>
+            </div>
+            <div class="stat col-xs-4" style="padding-left: 50px;">
+              <div class="number-stat">{{listings}}</div>
+              <div class="desc-stat">Listings</div>
             </div>
           </div>
+
+          <div class="social">
+            <i class="fa fa-facebook-square" aria-hidden="true"></i>
+            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+            <i class="fa fa-pinterest-square" aria-hidden="true"></i>
+            <i class="fa fa-tumblr-square" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="right col-lg-8">
+          <ul class="nav">
+            <li>Listings</li>
+            <li>Shares</li>
+            <li>Followers</li>
+            <li>Following</li>
+          </ul>
+          <span *ngIf='!ownProfile' class="follow">Follow</span>
+          <div class="row gallery">
+            <div class="col-md-4">
+              <app-profile-item-card></app-profile-item-card>
+            </div>
+            <div class="col-md-4">
+              <app-profile-item-card></app-profile-item-card>
+            </div>
+            <div class="col-md-4">
+              <app-profile-item-card></app-profile-item-card>
+            </div>
+            <div class="col-md-4">
+              <app-profile-item-card></app-profile-item-card>
+            </div>
+            <div class="col-md-4">
+              <app-profile-item-card></app-profile-item-card>
+            </div>
+            <div class="col-md-4">
+              <app-profile-item-card></app-profile-item-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>

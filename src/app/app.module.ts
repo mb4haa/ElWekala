@@ -33,6 +33,7 @@ import { NewsComponent } from './news/news.component';
 import { itemCardComponent } from './news/itemCard/itemCard.component';
 import { ProfileItemCardComponent } from './profile/profile-item-card/profile-item-card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileService } from './profile.service';
 import { SignupService } from './signup.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -65,7 +66,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     BrowserAnimationsModule
   ],
   entryComponents: [DialogContentExampleDialog],
-  providers: [SignupService],
+  providers: [SignupService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

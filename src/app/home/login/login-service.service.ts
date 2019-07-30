@@ -5,11 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginComponent } from './login.component';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
-const BACKEND_URL = environment.URL + 'user';
+const BACKEND_URL = environment.url + 'user';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class LoginService {
 
 private token: string;
@@ -44,10 +44,8 @@ loginUser(email: string, password: string) {
     //   this.saveAuthData(token, expirationDate);
       this.router.navigate(['/news']);
       }
-     }, error => {
-       console.log(error);
-    //    this.authStatusListener.next(false);
-     });
+    };
+    this.http.post<{ token: string, expiresIn: number, user: any }>('http://localhost:3000/api/user/login', { email, password });
   }
 }
  

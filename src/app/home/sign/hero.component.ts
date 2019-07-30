@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
 import { SignupService } from '../../signup.service';
 
@@ -12,7 +12,7 @@ import { SignupService } from '../../signup.service';
 
 export class HeroComponent implements OnInit, OnDestroy {
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
 
@@ -28,9 +28,9 @@ export class HeroComponent implements OnInit, OnDestroy {
     });
   }
 
-ngOnDestroy() {
+  ngOnDestroy() {
 
-}
+  }
 
 }
 
@@ -43,7 +43,7 @@ ngOnDestroy() {
 // tslint:disable-next-line:component-class-suffix
 export class DialogContentExampleDialog {
 
-  
+
   reader = new FileReader();
   url = '';
   private firstName: string = '';
@@ -55,7 +55,7 @@ export class DialogContentExampleDialog {
   genders: string[] = ['Rather not specify', 'Male', 'Female'];
   sizes: string[] = ['Unknown', 'XS', 'Small', 'Medium', 'Large', 'XL', 'XXL'];
 
-  constructor(private signupService: SignupService){}
+  constructor(private signupService: SignupService) { }
 
   onSendFile(event) {
     console.log('Ya SAAALEH');
@@ -70,27 +70,27 @@ export class DialogContentExampleDialog {
     };
   }
 
-  onFirstName(event){
+  onFirstName(event) {
     console.log('firstname' + event.target.value);
     this.firstName = event.target.value;
   }
 
-  onLastName(event: any){
+  onLastName(event: any) {
     console.log('lastname' + event.target.value);
     this.lastName = event.target.value;
   }
 
-  onEmail(event: any){
+  onEmail(event: any) {
     console.log('email' + event.target.value);
     this.email = event.target.value;
   }
 
-  onPassword(event: any){
+  onPassword(event: any) {
     console.log('pass' + event.target.value);
     this.password = event.target.value;
   }
 
-  onSignup(event: any){
+  onSignup(event: any) {
     console.log(this.signupService);
     this.signupService.signup({
       firstName: this.firstName,
@@ -102,11 +102,11 @@ export class DialogContentExampleDialog {
     });
   }
 
-  onGenderSelected(event: any){
+  onGenderSelected(event: any) {
     this.gender = event.target.value;
   }
 
-  onSizeSelected(event: any){
+  onSizeSelected(event: any) {
     this.gender = event.target.value;
   }
 
