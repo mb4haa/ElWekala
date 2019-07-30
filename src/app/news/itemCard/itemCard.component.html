@@ -1,37 +1,33 @@
-<div class="search-results"
-      infinite-scroll
-      [infiniteScrollDistance]="scrollDistance"
-      [infiniteScrollUpDistance]="scrollUpDistance"
-      [infiniteScrollThrottle]="throttle"
-      (scrolled)="onScrollDown()"
-      (scrolledUp)="onUp()">
-<div *ngFor="let card of cards">
-<div class="card" >
-    <div class="card-header">
-      user name + "has posted a listing!" 
-    </div>
-    <div class="card-body">
-        <img src="../../../assets/imgs/KeenSmall.png" class="card-img-top" alt="...">
-      <h5 class="card-title">{{card.name}}</h5>
-      <p class="card-text">{{card.price}} | {{card.size}} | Brand</p>
-    </div>
-    <div class="controls">
-      <div class="icon-container">
-        <div class="icons">
-        <p>{{card.likes}}</p>
-        <mat-icon class="icon">favorite</mat-icon>
-        </div>
-        <div class="icons">
-        <mat-icon class="icon">autorenew</mat-icon>
-        </div>
-        <div class="icons">
-        <mat-icon class="icon">share</mat-icon>
+<div class="search-results" infinite-scroll [infiniteScrollDistance]="scrollDistance"
+  [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()"
+  (scrolledUp)="onUp()">
+  <div *ngFor="let card of cards">
+    <div class="card">
+      <div class="card-header">
+        user name + "has posted a listing!"
       </div>
+      <div class="card-body">
+        <img src="../../../assets/imgs/KeenSmall.png" class="card-img-top" alt="...">
+        <h5 class="card-title">{{card.name}}</h5>
+        <p class="card-text">{{card.price}} | {{card.size}} | Brand</p>
+      </div>
+      <div class="controls">
+        <div class="icon-container">
+          <div class="icons">
+            <p>{{card.likes}}</p>
+            <mat-icon class="icon">favorite</mat-icon>
+          </div>
+          <div class="icons">
+            <mat-icon class="icon">autorenew</mat-icon>
+          </div>
+          <div class="icons">
+            <mat-icon class="icon">share</mat-icon>
+          </div>
         </div>
         <div class="buy-btn-container">
           <a href="#" class="btn btn-primary">buy</a>
         </div>
-    </div>  
+      </div>
+    </div>
   </div>
-</div>
 </div>

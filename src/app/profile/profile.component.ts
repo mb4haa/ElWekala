@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
+import { Card } from './card.modal';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -8,6 +11,7 @@ import { ProfileService } from '../profile.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  private currTab: string = 'listings';
   public ownProfile;
   public firstName;
   public lastName;
@@ -15,35 +19,85 @@ export class ProfileComponent implements OnInit {
   public following;
   public listings;
   public email;
-
-  constructor(private profileService: ProfileService) { }
+  public cards: Card[];
+  public likes = [];
+  public shares = [];
+  public followersProfs = [];
+  public followingProfs = [];
+  public followerIds;
+  public followingIds;
+  public sharesIds;
+  public likesIds;
+  constructor(private profileService: ProfileService, private http: HttpClient) { }
 
   ngOnInit() {
-    if(localStorage.getItem('otherId')){
+    if (localStorage.getItem('otherId')) {
       this.ownProfile = false;
       this.loadProfile(localStorage.getItem('otherId'));
-      this.loadListings(localStorage.getItem('otherId'));
     }
-    else{
+    else {
       this.ownProfile = true;
       this.loadProfile(localStorage.getItem('uid'));
-      this.loadListings(localStorage.getItem('uid'));
     }
-    
+
   }
 
-  loadProfile(id: string){
-    var result = this.profileService.loadProfile(id);
-    this.firstName = localStorage.getItem('dispfirstname');
-    this.lastName = localStorage.getItem('displastname');
-    this.email= localStorage.getItem('dispemail');
-    this.followers= localStorage.getItem('dispfollowers').split(',').length - 1;
-    this.following= localStorage.getItem('dispfollowing').split(',').length - 1;
-    this.listings= localStorage.getItem('displistings').split(',').length - 1;
-    // console.log(result);
+  loadProfile(id: string) {
+    this.http.patch(environment.url + 'user/viewProfile', { _id: id }).subscribe(response => {
+      this.firstName = response['user'].firstName;
+      this.lastName = response['user'].lastName;
+      this.email = response['user'].email;
+      this.followers = response['user'].followers.length - 1;
+      this.following = response['user'].following.length - 1;
+      this.listings = response['user'].listings.length - 1;
+      this.followerIds = response['user'].followers;
+      this.followingIds = response['user'].following;
+      this.sharesIds = response['user'].retweets;
+      this.likesIds = response['user'].likes;
+      this.loadListings(localStorage.getItem('uid'));
+      this.getProductsinLikes();
+      this.getProductsinShares();
+      this.getFollowers();
+      // this.getFollowing();
+    })
   }
 
-  loadListings(id: string){
-    this.profileService.loadListings(id);
+  loadListings(id: string) {
+    this.http.patch(environment.url + 'product/getListings', { _id: id }).subscribe(response => {
+      this.cards = response['products'];
+    })
   }
+
+  getProductsinLikes() {
+    for (var i = 1; i < this.likesIds.length; i++) {
+      this.http.patch(environment.url + 'product/getProductById', { _id: this.likesIds[i] }).subscribe(response => {
+        this.likes.push(response['product']);
+      })
+    }
+  }
+
+  getProductsinShares() {
+    for (var i = 1; i < this.sharesIds.length; i++) {
+      this.http.patch(environment.url + 'product/getProductById', { _id: this.sharesIds[i] }).subscribe(response => {
+        this.shares.push(response['product']);
+      })
+    }
+  }
+
+  getFollowers() {
+    for (var i = 1; i < this.followerIds.length; i++) {
+      this.http.patch(environment.url + 'user/getUserById', { _id: this.followerIds[i] }).subscribe(response => {
+        this.followersProfs.push(response['user']);
+      })
+    }
+  }
+
+  getFollowing() {
+    for (var i = 1; i < this.followingIds.length; i++) {
+      this.http.patch(environment.url + 'user/getUserById', { _id: this.followingIds[i] }).subscribe(response => {
+        this.followingProfs.push(response['user']);
+      })
+    }
+  }
+
 }

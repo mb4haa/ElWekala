@@ -75,6 +75,19 @@ router.patch('/getProducts', (req, res, next) => {
   })
 });
 
+router.patch('/getProductById', (req, res, next) => {
+  Product.findById(req.body._id).then(product => {
+    if (!product) {
+      return res.status(404).json({
+        message: 'No product Found'
+      })
+    }
+    res.status(200).json({
+      product: product
+    });
+  });
+});
+
 router.patch("/likeProduct/:id", checkAuth, (req, res, next) => {
   prodId = req.params.id
   myId = req.body.uid
