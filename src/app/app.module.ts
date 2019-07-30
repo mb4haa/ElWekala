@@ -36,11 +36,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileService } from './profile.service';
 import { SignupService } from './signup.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ItemDescComponent } from './item-desc/item-desc.component';
 
 @NgModule({
   declarations: [
     AppComponent, headerComponent, HomeComponent, HeroComponent, LoginComponent, HiwComponent, BrandComponent,
-    footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent,ProfileComponent, ProfileItemCardComponent
+    footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent,ProfileComponent, ProfileItemCardComponent, ItemDescComponent
 
   ],
   imports: [
