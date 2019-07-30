@@ -41,15 +41,20 @@ ngOnDestroy() {
 })
 // tslint:disable-next-line:component-class-suffix
 export class DialogContentExampleDialog {
+
+  
   reader = new FileReader();
   url = '';
   private firstName: string = '';
   private lastName: string = '';
   private email: string = '';
-  private gender: string = '';
-  private size: string = '';
+  private gender: string = 'Rather not specify';
+  private size: string = 'Unknown';
+  private password: string = '';
+  genders: string[] = ['Rather not specify', 'Male', 'Female'];
+  sizes: string[] = ['Unknown', 'XS', 'Small', 'Medium', 'Large', 'XL', 'XXL'];
 
-  constructor(public signupService: SignupService){}
+  constructor(private signupService: SignupService){}
 
   onSendFile(event) {
     console.log('Ya SAAALEH');
@@ -66,26 +71,44 @@ export class DialogContentExampleDialog {
   }
 
   onFirstName(event){
+    console.log('firstname' + event.target.value);
     this.firstName = event.target.value;
   }
 
   onLastName(event: any){
-    this.firstName = event.target.value;
-    console.log(this.firstName);
+    console.log('lastname' + event.target.value);
+    this.lastName = event.target.value;
   }
 
   onEmail(event: any){
-    this.firstName = event.target.value;
-    console.log(this.firstName);
+    console.log('email' + event.target.value);
+    this.email = event.target.value;
   }
 
-  onSignup(form: NgForm){
-    console.log(form.value);
-    this.signupService.signup({});
+  onPassword(event: any){
+    console.log('pass' + event.target.value);
+    this.password = event.target.value;
+  }
+
+  onSignup(event: any){
+    console.log(this.signupService);
+    this.signupService.signup({
+      firstName: this.firstName,
+      lastName: this.lastName,
+      gender: this.gender,
+      size: this.size,
+      password: this.password,
+      email: this.email
+    });
   }
 
   onGenderSelected(event: any){
-
+    this.gender = event.target.value;
   }
+
+  onSizeSelected(event: any){
+    this.gender = event.target.value;
+  }
+
 }
 

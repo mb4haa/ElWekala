@@ -31,6 +31,8 @@ import { hwhComponent } from './home/hwh/hwh.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NewsComponent } from './news/news.component';
 import { itemCardComponent } from './news/itemCard/itemCard.component';
+import { SignupService } from './signup.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -55,13 +57,13 @@ import { itemCardComponent } from './news/itemCard/itemCard.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule
   ],
   entryComponents: [DialogContentExampleDialog],
-  providers: [],
+  providers: [SignupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
