@@ -13,15 +13,15 @@ export class ProfileService {
     // console.log(id);
     this.http.patch(environment.url + 'user/viewProfile', { _id: id }).subscribe(response => {
       // console.log(response);
-      localStorage.setItem("dispfirstname", response.user.firstName);
+      localStorage.setItem("dispfirstname", response['user'].firstName);
       // console.log(localStorage.getItem("dispfirstname"));
-      localStorage.setItem("displastname", response.user.lastName);
+      localStorage.setItem("displastname", response['user'].lastName);
       // console.log(localStorage.getItem("displastname"));
 
-      localStorage.setItem("dispfollowers", response.user.followers);
-      localStorage.setItem("dispfollowing", response.user.following);
-      localStorage.setItem("displistings", response.user.listings);
-      localStorage.setItem("dispemail", response.user.email);
+      localStorage.setItem("dispfollowers", response['user'].followers);
+      localStorage.setItem("dispfollowing", response['user'].following);
+      localStorage.setItem("displistings", response['user'].listings);
+      localStorage.setItem("dispemail", response['user'].email);
 
     })
   }
