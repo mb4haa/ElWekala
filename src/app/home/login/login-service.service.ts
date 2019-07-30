@@ -40,7 +40,7 @@ loginUser(email: string, password: string) {
       console.log(name);
       console.log(token);
       localStorage.setItem("token",token)
-      localStorage.setItem("Name",name)
+      localStorage.setItem("name",name)
     //   this.saveAuthData(token, expirationDate);
       this.router.navigate(['/news']);
       }

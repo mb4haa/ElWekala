@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 // tslint:disable-next-line:class-name
 export class itemCardComponent implements OnInit, OnDestroy {
   ngOnInit() {
-
+    
   }
 
 
