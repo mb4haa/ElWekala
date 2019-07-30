@@ -34,7 +34,7 @@ export class itemCardComponent implements OnInit, OnDestroy {
     // } );
     this.http.patch<{products: any}>(this.BACKEND_URL + '/getProducts', {pageNumber: this.page}).subscribe(res => {
       this.cards = res['products'];
-     //console.log(this.cards);
+     // console.log(this.cards);
     });
 
   }

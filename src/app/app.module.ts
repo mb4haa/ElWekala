@@ -29,7 +29,7 @@ import { footerComponent } from './footer/footer.component';
 import {DialogContentExampleDialog} from './home/sign/hero.component';
 import { hwhComponent } from './home/hwh/hwh.component';
 import { ProfileComponent } from './profile/profile.component';
-import { NewsComponent } from './news/news.component';
+import { NewsComponent, DialogContentExampleDialogItem } from './news/news.component';
 import { itemCardComponent } from './news/itemCard/itemCard.component';
 import { ProfileItemCardComponent } from './profile/profile-item-card/profile-item-card.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -37,15 +37,19 @@ import { ProfileService } from './profile.service';
 import { SignupService } from './signup.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ItemDescComponent } from './item-desc/item-desc.component';
+import { NgxTagsInputModule } from 'ngx-tags-input';
+
 
 @NgModule({
   declarations: [
     AppComponent, headerComponent, HomeComponent, HeroComponent, LoginComponent, HiwComponent, BrandComponent,
-    footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent,ProfileComponent, ProfileItemCardComponent, ItemDescComponent
+    footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent,ProfileComponent, ProfileItemCardComponent, ItemDescComponent,
+    DialogContentExampleDialogItem
 
   ],
   imports: [
     BrowserModule,
+    NgxTagsInputModule,
     AppRoutingModule,
     MatInputModule,
     MatCardModule,
@@ -66,7 +70,7 @@ import { ItemDescComponent } from './item-desc/item-desc.component';
     FormsModule,
     BrowserAnimationsModule
   ],
-  entryComponents: [DialogContentExampleDialog],
+  entryComponents: [DialogContentExampleDialog, DialogContentExampleDialogItem],
   providers: [SignupService, ProfileService],
   bootstrap: [AppComponent]
 })
