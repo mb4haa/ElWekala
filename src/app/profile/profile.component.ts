@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
       this.loadProfile(localStorage.getItem('uid'));
       this.loadListings(localStorage.getItem('uid'));
     }
-    
+    //
   }
 
   loadProfile(id: string){

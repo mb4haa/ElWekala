@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Sign up</h2>
+<mat-dialog-content class="mat-typography">
+    <form>
+        <div class="form-group" id="profile-picture">
+          <label for="exampleFormControlFile1">Choose Profile Picture</label>
+          <img [src]='url' alt="" width='20%' height="20%">
+          <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="onSendFile($event)"/>
+        </div>
+      </form>
+    <form name='myForm'>
+      <mat-form-field>
+      
+        <!-- <label for="exampleFormControlInput1">First Name</label> -->
+        <input matInput type="text" name="myName" ngModel class="form-control" #nameInput="ngModel" id="exampleFormControlInput1" placeholder="Product Name" required >
+        <mat-error *ngIf="nameInput.invalid">Please enter a valid name</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <!-- <label for="exampleFormControlInput1">First Name</label> -->
+        <input matInput type="number" min="1" name="myName" ngModel class="form-control" #nameInput="ngModel" id="exampleFormControlInput1" placeholder="Product Price" required >
+        <mat-error *ngIf="nameInput.invalid">Please enter product price</mat-error>
+      </mat-form-field>
+
+      <div class="multi-group">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Condition</label>
+            <select class="form-control"  id="exampleFormControlSelect1">
+              <option  *ngFor="let condition of conditions" [value]="condition" >{{condition}} </option>
+            </select>
+        </div>
+      </div>
+      <div class="multi-group">
+        <div class="form-group">
+            <label for="exampleFormControlSelect2">Size</label>
+            <select class="form-control"  id="exampleFormControlSelect2">
+              <option  *ngFor="let size of sizes" [value]="size" >{{size}} </option>
+            </select>
+        </div>
+      </div>
+      <ngx-tags-input class="form-control input-lg tag" (onTagsChanged)="onTagsChanged($event)" [removeLastOnBackspace]="removeLastOnBackspace" [(ngModel)]="tags" name="tags" placeholder="Enter your tags here"></ngx-tags-input>
+      </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" (click)='onSignup($event)' cdkFocusInitial>Send</button>
+</mat-dialog-actions>

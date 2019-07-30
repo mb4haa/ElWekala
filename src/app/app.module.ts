@@ -36,6 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileService } from './profile.service';
 import { SignupService } from './signup.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgxTagsInputModule } from 'ngx-tags-input';
+
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
   ],
   imports: [
     BrowserModule,
+    NgxTagsInputModule,
     AppRoutingModule,
     MatInputModule,
     MatCardModule,
