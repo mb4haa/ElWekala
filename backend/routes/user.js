@@ -38,6 +38,7 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
+  console.log(req);
   let fetchedUser;
   User.findOne({ email: req.body.email })
     .then(user => {
@@ -47,6 +48,7 @@ router.post('/login', (req, res, next) => {
         });
       }
       else {
+        console.log(req);
         fetchedUser = user;
         passwordBoolean = bcrypt.compare(req.body.password, user.password, function (err, res2) {
           if (res2) {
