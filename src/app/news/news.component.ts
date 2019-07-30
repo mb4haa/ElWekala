@@ -38,7 +38,8 @@ export class DialogContentExampleDialogItem {
   private gender = 'Rather not specify';
   private size = 'Unknown';
   private password = '';
-  genders: string[] = ['Rather not specify', 'Male', 'Female'];
+  test = 'omar';
+  genders = ['Rather not specify', 'Male', 'Female'];
   sizes: string[] = ['Unknown', 'XS', 'Small', 'Medium', 'Large', 'XL', 'XXL'];
 
   reader = new FileReader();
