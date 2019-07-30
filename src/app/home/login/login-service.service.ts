@@ -44,8 +44,7 @@ loginUser(email: string, password: string) {
     //   this.saveAuthData(token, expirationDate);
       this.router.navigate(['/news']);
       }
-    };
-    this.http.post<{ token: string, expiresIn: number, user: any }>('http://localhost:3000/api/user/login', { email, password });
+    });
   }
 }
  
