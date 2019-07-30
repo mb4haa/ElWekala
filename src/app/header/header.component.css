@@ -28,7 +28,8 @@ ul{
 }
 .mat-toolbar-row, .mat-toolbar-single-row {
   height: 75px;
-}
-.mat-toolbar-row, .mat-toolbar-single-row {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
   padding: 0 2%;
+  z-index: 2;
+
 }

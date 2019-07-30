@@ -10,10 +10,13 @@ import { environment } from 'src/environments/environment';
 })
 
 export class NewsComponent implements OnInit, OnDestroy {
-
+  
 constructor(public dialog: MatDialog) {}
   ngOnInit() {
-
+  //   if (this.reload) {
+  //   window.location.reload();
+  //   this.reload = false;
+  // }
   }
 
   openDialog() {
@@ -38,7 +41,7 @@ constructor(public dialog: MatDialog) {}
 })
 // tslint:disable-next-line:component-class-suffix
 export class DialogContentExampleDialogItem {
-  name: string = ""
+  name: string = "";
   price: Number = -1
   condition: any = '';
   size: any = '';
@@ -84,23 +87,26 @@ export class DialogContentExampleDialogItem {
 
   }
   onTagsChanged(event: any){
-    //this.tags = event.target.value;
+    // this.tags = event.target.value;
   }
 //
   onAdd(event: any) {
-    let finalTags = []
+    const finalTags = [];
     this.tags.forEach(element => {
       finalTags.push(element['displayValue'])
     });
-    let user:any = localStorage.getItem('user')
-    console.log(this.url)
-    this.http.post(this.BACKEND_URL+"/addProduct",{token:localStorage.getItem('token'),category:finalTags,size:this.size, condition: this.condition, price: this.price, name: this.name, image:this.url,sellerName:localStorage.getItem('name'),sellerEmail:localStorage.getItem('email'),uid:localStorage.getItem('uid')})
+    const user: any = localStorage.getItem('user');
+    console.log(this.url);
+    this.http.post(this.BACKEND_URL + '/addProduct', {token: localStorage.getItem('token'), category: finalTags, size: this.size,
+    condition: this.condition, price: this.price,
+    name: this.name, image: this.url, sellerName: localStorage.getItem('name'),
+    sellerEmail: localStorage.getItem('email'), uid: localStorage.getItem('uid')})
     .subscribe((response) => {
       console.log(response);
 
-    },err => {
+    }, err => {
       alert(err);
-    })
+    });
   }
 
 

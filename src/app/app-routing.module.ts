@@ -7,14 +7,16 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { NewsComponent } from './news/news.component';
 import { ItemDescComponent } from './item-desc/item-desc.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path:'profile', component: ProfileComponent},
+  {path: 'profile', component: ProfileComponent},
   {path: 'news', component: NewsComponent},
-  {path: 'item-desc', component: ItemDescComponent}
+  {path: 'item-desc', component: ItemDescComponent},
+  {path: 'checkout', component: CheckoutComponent}
 
 ];
 

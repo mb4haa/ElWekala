@@ -40,16 +40,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileService } from './profile.service';
 import { SignupService } from './signup.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { CheckoutComponent } from './checkout/checkout.component';
 import { ItemDescComponent } from './item-desc/item-desc.component';
 import { NgxTagsInputModule } from 'ngx-tags-input';
 import { FiltersComponent } from './news/filters/filters.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
     AppComponent, headerComponent, HomeComponent, HeroComponent, LoginComponent, HiwComponent, BrandComponent,
     footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent, ProfileComponent,
     ProfileItemCardComponent, DialogContentExampleDialogItem, CheckoutComponent,ItemDescComponent, FiltersComponent
+    , DialogContentExampleDialogItem, ItemDescComponent, CheckoutComponent
 
   ],
   imports: [
