@@ -47,7 +47,9 @@ loginUser(email: string, password: string) {
       localStorage.setItem('user',response.user);
 //
     //   this.saveAuthData(token, expirationDate);
-      this.router.navigate(['/news']);
+      this.router.navigate(['/news']).then(ev => {
+        window.location.reload();
+      });
       }
     });
   }

@@ -7,9 +7,8 @@
       <div class="row">
         <div class="left col-lg-3">
           <div class="photo-left">
-            <img class="photo"
-              [src]="image" />
-          
+            <img class="photo" [src]="image" />
+
           </div>
           <h4 class="name">{{firstName}} {{lastName}}</h4>
           <div class="username">{{email}}</div>
@@ -52,26 +51,26 @@
               </div>
             </mat-tab>
             <mat-tab label="Shares">
-                <div class="row gallery">
-                    <div class="col-md-4" *ngFor="let share of shares">
-                      <app-profile-item-card></app-profile-item-card>
-                    </div>
-                  </div>
+              <div class="row gallery">
+                <div class="col-md-4" *ngFor="let share of shares">
+                  <app-profile-item-card></app-profile-item-card>
+                </div>
+              </div>
             </mat-tab>
             <mat-tab label="Followers">
-                <div class="row f-list">
-                    <div class="col-md-4" *ngFor="let share of shares">
-                      <span id="f-name">first +last name</span>
-                      <span id="f-username">first +last name</span>
-                      <button id="follow">Follow</button>
-                    </div>
-                  </div>
+              <div class="row f-list">
+                <div class="col-md-4" *ngFor="let share of shares">
+                  <span id="f-name">first +last name</span>
+                  <span id="f-username">first +last name</span>
+                  <button id="follow">Follow</button>
+                </div>
+              </div>
             </mat-tab>
             <mat-tab label="Following">
 
             </mat-tab>
           </mat-tab-group>
-          <span *ngIf='ownProfile' class="follow">Follow</span>
+
           <!-- <ul class="nav">
             <li (click)='onListings($event)'>Listings</li>
             <li (click)='onShares($event)'>Shares</li>
@@ -85,6 +84,10 @@
               <app-profile-item-card></app-profile-item-card>
             </div>
           </div> -->
+        </div>
+        <div *ngIf='!ownProfile' >
+          <button class="follow" (click)='onFollowDirect($event)'>{{isFollowing}}</button>
+          <!-- <button class="unfollow" *ngIf='isFollowing' (click)='onUnFollowDirect($event)'>Unfollow</button> -->
         </div>
       </div>
     </div>
