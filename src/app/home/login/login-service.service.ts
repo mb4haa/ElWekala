@@ -41,12 +41,15 @@ loginUser(email: string, password: string) {
       console.log(token);
       localStorage.setItem('token', token)
       localStorage.setItem('name', name)
+      localStorage.setItem('likes',response.user.likes)
       localStorage.setItem('email', response.user.email)
       localStorage.setItem('uid',response.user._id);
       localStorage.setItem('user',response.user);
 //
     //   this.saveAuthData(token, expirationDate);
-      this.router.navigate(['/news']);
+      this.router.navigate(['/news']).then(ev => {
+        window.location.reload();
+      });
       }
     });
   }

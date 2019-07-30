@@ -4,7 +4,7 @@
   <div *ngFor="let card of cards">
     <div class="card">
       <div class="card-header">
-        user name + "has posted a listing!"
+        {{card.sellerName}}  has posted a listing!
       </div>
       <div class="card-body">
         <img [src]="card.image" class="card-img-top" alt="...">
@@ -13,12 +13,16 @@
       </div>
       <div class="controls">
         <div class="icon-container">
-          <div class="icons">
+          <div class="icons" *ngIf = '!(likes.includes(card._id))'>
             <p>{{card.likes}}</p>
-            <mat-icon class="icon">favorite</mat-icon>
+            <a (click) = "rate(card._id)"><mat-icon class="icon">favorite_border</mat-icon></a>
+          </div>
+          <div class="icons" *ngIf = '(likes.includes(card._id))'>
+            <p>{{card.likes}}</p>
+            <a (click) = "unrate(card._id)"><mat-icon class="icon">favorite</mat-icon></a>
           </div>
           <div class="icons">
-            <mat-icon class="icon">autorenew</mat-icon>
+            <a (click) = "test(card._id)"><mat-icon class="icon">autorenew</mat-icon> </a>
           </div>
           <div class="icons">
             <mat-icon class="icon">share</mat-icon>
