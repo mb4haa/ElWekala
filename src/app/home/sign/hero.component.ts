@@ -109,6 +109,5 @@ export class DialogContentExampleDialog {
   onSizeSelected(event: any) {
     this.size = event.target.value;
   }
-
 }
 
