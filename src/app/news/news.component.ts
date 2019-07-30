@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-news',
@@ -36,6 +38,8 @@ constructor(public dialog: MatDialog) {}
 })
 // tslint:disable-next-line:component-class-suffix
 export class DialogContentExampleDialogItem {
+  name: string = ""
+  price: Number = -1
   condition: string = 'Unspecified';
   size: string = 'Unknown';
   conditions: string[] = ['Unspecified', 'New', 'Used'];
@@ -43,8 +47,11 @@ export class DialogContentExampleDialogItem {
   tags: any = [];
   reader = new FileReader();
   url = '../../../assets/imgs/avatar.png';
+  BACKEND_URL = environment.url + 'product';
 
-  constructor() { }
+
+
+  constructor(private http: HttpClient) { }
 
   onSendFile(event) {
     console.log('Ya SAAALEH');
@@ -58,26 +65,36 @@ export class DialogContentExampleDialogItem {
       this.url = ev.target.result;
     };
   }
-  // onName(event) {
-  //   console.log('firstname' + event.target.value);
-  //   this.firstName = event.target.value;
-  // }
+  onName(event) {
+    this.name = event.target.value;
+  }
 
-  // onPrice(event: any) {
-  //   console.log('lastname' + event.target.value);
-  //   this.lastName = event.target.value;
-  // }
+  onPrice(event: any) {
+    this.price = event.target.value;
+  }
 
-  // onCondition(event: any) {
-  //   console.log('email' + event.target.value);
-  //   this.email = event.target.value;
-  // }
+  onCondition(event: any) {
+    this.condition = event.target.value;
+  }
 
-  // onSize(event: any) {
-  //   console.log('pass' + event.target.value);
-  //   this.password = event.target.value;
-  // }
+  onSize(event: any) {
+    this.size = event.target.value;
+  }
+  onTagsChanged(event: any){
+    //this.tags = event.target.value;
+  }
 
+  onAdd(event: any) {
+    let finalTags = []
+    this.tags.forEach(element => {
+      finalTags.push(element['displayValue'])
+    });
+    this.http.post(this.BACKEND_URL+"/addProduct",{category:finalTags,size: this.size, condition: this.condition, price: this.price, name: this.name, img: 'img'})
+    .subscribe((response) => {
+      console.log(response);
+
+    })
+  }
 
 
 

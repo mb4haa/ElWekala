@@ -14,7 +14,7 @@ router.post("/addProduct", checkAuth, (req, res, next) => {
     price: req.body.price,
     size: req.body.size,
     condition: req.body.condition,
-    category: req.body.category,
+    category: "",
     tags: req.body.tags.split(',')
   });
 
