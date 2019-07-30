@@ -14,8 +14,10 @@ import { MatInputModule,
   MatNativeDateModule,
   MatButtonToggleModule,
   MatDialogTitle,
+  MatSliderModule,
   MatButton,
   MatDialogModule,
+
   MatIconModule,
   MatTabGroup,
   MatTabsModule} from '@angular/material';
@@ -41,12 +43,13 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ItemDescComponent } from './item-desc/item-desc.component';
 import { NgxTagsInputModule } from 'ngx-tags-input';
+import { FiltersComponent } from './news/filters/filters.component';
 
 @NgModule({
   declarations: [
     AppComponent, headerComponent, HomeComponent, HeroComponent, LoginComponent, HiwComponent, BrandComponent,
     footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent, ProfileComponent,
-    ProfileItemCardComponent, DialogContentExampleDialogItem, CheckoutComponent,ItemDescComponent
+    ProfileItemCardComponent, DialogContentExampleDialogItem, CheckoutComponent,ItemDescComponent, FiltersComponent
 
   ],
   imports: [
@@ -65,6 +68,7 @@ import { NgxTagsInputModule } from 'ngx-tags-input';
     MatPaginatorModule,
     MatDatepickerModule,
     MatTabsModule,
+    MatSliderModule,
     MatNativeDateModule,
     MatDialogModule,
     HttpClientModule,
