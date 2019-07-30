@@ -9,7 +9,7 @@ const checkAuth = require('../middleware/check-auth');
 router.post("/addProduct", checkAuth, (req, res, next) => {
   const product = new Product({
     name: req.body.name,
-    image: "Placeholder",
+    image: req.body.image,
     seller: req.body.uid,
     price: req.body.price,
     size: req.body.size,

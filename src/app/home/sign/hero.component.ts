@@ -107,7 +107,7 @@ export class DialogContentExampleDialog {
   }
 
   onSizeSelected(event: any) {
-    this.gender = event.target.value;
+    this.size = event.target.value;
   }
 
 }

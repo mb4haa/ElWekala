@@ -58,6 +58,25 @@ export class DialogContentExampleDialogItem {
       this.url = ev.target.result;
     };
   }
+  // onName(event) {
+  //   console.log('firstname' + event.target.value);
+  //   this.firstName = event.target.value;
+  // }
+
+  // onPrice(event: any) {
+  //   console.log('lastname' + event.target.value);
+  //   this.lastName = event.target.value;
+  // }
+
+  // onCondition(event: any) {
+  //   console.log('email' + event.target.value);
+  //   this.email = event.target.value;
+  // }
+
+  // onSize(event: any) {
+  //   console.log('pass' + event.target.value);
+  //   this.password = event.target.value;
+  // }
 
 
 

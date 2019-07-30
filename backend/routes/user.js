@@ -7,7 +7,11 @@ const checkAuth = require('../middleware/check-auth');
 const router = express.Router();
 
 router.post("/signup", (req, res, next) => {
-  console.log(1);
+  if(req.body.firstName=='' || req.body.lastName=='' || req.body.password=='' || 
+    req.body.gender=='' ){
+      return res.status(401).json({message:"Insufficent Info"})
+    }
+   else{ 
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
@@ -38,6 +42,7 @@ router.post("/signup", (req, res, next) => {
           });
         });
     });
+  }
 });
 
 router.post('/login', (req, res, next) => {
