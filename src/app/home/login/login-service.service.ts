@@ -12,19 +12,40 @@ const BACKEND_URL = environment.url + 'user';
 @Injectable({ providedIn: 'root' })
 export class LoginService {
 
-  private token: string;
+private token: string;
 
-  constructor(private http: HttpClient, private router: Router) { }
+constructor(private http: HttpClient, private router: Router) {}
 
-  loginUser(email: string, password: string) {
+loginUser(email: string, password: string) {
 
-    // const data  = JSON.stringify({email, password});
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
+  // const data  = JSON.stringify({email, password});
+  const config = { 
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  this.http.post<{token: string, expiresIn: number, user: any}>( 'http://localhost:3000/api/user/login', {email, password} )
+    .subscribe(response => {
+      console.log(response);
+      const token = response.token;
+      this.token = token;
+      const name = response.user.firstName + ' ' + response.user.lastName;
+      if (token) {
+      const expiresInDuration = response.expiresIn;
+    //   this.setAuthTimer(expiresInDuration);
+    //   this.isAuthenticated = true;
+    //   this.authStatusListener.next(true);
+      const now = new Date();
+      const expirationDate = new Date (now.getTime() + expiresInDuration * 1000);
+      console.log(name);
+      console.log(token);
+      localStorage.setItem('token', token)
+      localStorage.setItem('name', name)
+    //   this.saveAuthData(token, expirationDate);
+      this.router.navigate(['/news']);
       }
     };
     this.http.post<{ token: string, expiresIn: number, user: any }>('http://localhost:3000/api/user/login', { email, password });
   }
 }
-
+ 

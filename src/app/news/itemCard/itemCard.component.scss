@@ -5,11 +5,16 @@
 .card{
     width: 100%;
     border: 1px solid rgb(139,14,112,0.25);
+    margin-top: 2%;
+
 }
 .icon{
-        margin: 3%;
-        width: 20%;
         color: #8b0e70;
+}
+.icons{
+    margin: 3%;
+        width: 5%;
+        display: inline-block;
 }
 .card-img-top {
     min-height: 300px;

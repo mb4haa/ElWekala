@@ -60,13 +60,15 @@ router.post("/addProduct", checkAuth, (req, res, next) => {
   });
 });
 
-router.get('/getProducts', (req, res, next) => {
+router.patch('/getProducts', (req, res, next) => {
+  page = req.body.pageNumber
   Product.find().then(products => {
     if (!products) {
       return res.status(404).json({
         message: 'No products Found'
       })
     }
+    products = products.slice((page*5),(page*5)+5)
     res.status(200).json({
       products: products
     });
