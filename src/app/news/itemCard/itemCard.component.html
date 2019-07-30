@@ -4,7 +4,7 @@
   <div *ngFor="let card of cards">
     <div class="card">
       <div class="card-header">
-        {{card.sellerName}}  has posted a listing!
+        {{card.sellerName}}  has shared a listing!
       </div>
       <div class="card-body">
         <img [src]="card.image" class="card-img-top" alt="...">
@@ -22,6 +22,7 @@
             <a (click) = "unrate(card._id)"><mat-icon class="icon">favorite</mat-icon></a>
           </div>
           <div class="icons">
+              <p>{{card.shares}}</p>
             <a (click) = "test(card._id)"><mat-icon class="icon">autorenew</mat-icon> </a>
           </div>
           <div class="icons">

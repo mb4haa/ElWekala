@@ -64,12 +64,13 @@ router.post("/addProduct", checkAuth, (req, res, next) => {
 
 router.patch('/getProducts', (req, res, next) => {
   page = req.body.pageNumber
-  Product.find().then(products => {
+  Product.find().sort({lastShare:-1}).then(products => {
     if (!products) {
       return res.status(404).json({
         message: 'No products Found'
       })
     }
+    console.log(products)
     products = products.slice((page*5),(page*5)+5)
     res.status(200).json({
       products: products
@@ -193,8 +194,9 @@ router.patch("/shareProduct/:id", checkAuth, (req, res, next) => {
         else {
           Product.findById(prodId, function (err, likedProd) {
             if (likedProd) {
-
               likedProd.lastShare = Date.now()
+              likedProd.date = Date.now()
+              likedProd.shares = likedProd.shares + 1
               likedProd.save(function (err) {
                 if (err) {
                   return res.status(401).json({ message: err })

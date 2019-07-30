@@ -34,7 +34,6 @@ export class itemCardComponent implements OnInit, OnDestroy {
     //   console.log("this.card.length");
     // } );
     this.likes = (localStorage.getItem('likes').split(","))
-    console.log(typeof(this.likes))
     this.http.patch<{products: any}>(this.BACKEND_URL + '/getProducts', {pageNumber: this.page}).subscribe(res => {
       this.cards = res['products'];
      // console.log(this.cards);
@@ -69,8 +68,18 @@ export class itemCardComponent implements OnInit, OnDestroy {
     });
   }
   test(pid:any){
-    this.likes = (localStorage.getItem('likes').split(","))
-    console.log(this.likes)
+    let id = localStorage.getItem('uid')
+    this.http.patch<{}>(this.BACKEND_URL + '/shareProduct/'+pid, {token:localStorage.getItem('token'),uid:localStorage.getItem('uid')}).subscribe(res => {
+      if(res['message']=='Product updated'){
+        this.cards.forEach(element => {
+          if(element._id == pid){
+            element.shares+=1;
+          }
+        });
+
+      }
+    });
+
   }
 
   onScrollDown(ev) {
