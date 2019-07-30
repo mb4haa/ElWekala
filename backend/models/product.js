@@ -6,13 +6,15 @@ const productSchema = mongoose.Schema({
     image: { type: String, required: true },
     seller: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     price: { type: Number, required: true },
-    size: { type: String, enum: ['XS', 'Small', 'Medium', 'Large', 'XL', 'XXL', 'Unknown'], default: 'Unknown' },
+    size: { type: String, enum: ['XS', 'Small', 'Medium', 'Large', 'XL', 'XXL'], default: 'Small' },
     condition: { type: String, enum: ['New', 'Used', 'Unspecified'], default: 'Unspecified' },
     category: { type: String, enum: ['TBD'], default: 'TBD' },
     date: { type: Date, default: Date.now },
     lastShare: { type: Date, default: Date.now },
     tags: { type: Array, required: true },
-    likes: { type: Number, default: 0 }
+    likes: { type: Number, default: 0 },
+    sellerName:{type:String, required:true,default:''},
+    sellerEmail:{type:String,required:true,default:''}
 });
 
 productSchema.plugin(uniqueValidator);
