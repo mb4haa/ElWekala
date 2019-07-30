@@ -29,7 +29,7 @@ import { footerComponent } from './footer/footer.component';
 import {DialogContentExampleDialog} from './home/sign/hero.component';
 import { hwhComponent } from './home/hwh/hwh.component';
 import { ProfileComponent } from './profile/profile.component';
-import { NewsComponent } from './news/news.component';
+import { NewsComponent, DialogContentExampleDialogItem } from './news/news.component';
 import { itemCardComponent } from './news/itemCard/itemCard.component';
 import { ProfileItemCardComponent } from './profile/profile-item-card/profile-item-card.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -40,7 +40,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @NgModule({
   declarations: [
     AppComponent, headerComponent, HomeComponent, HeroComponent, LoginComponent, HiwComponent, BrandComponent,
-    footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent,ProfileComponent, ProfileItemCardComponent
+    footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent, ProfileComponent,
+    ProfileItemCardComponent, DialogContentExampleDialogItem
 
   ],
   imports: [
@@ -65,7 +66,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     FormsModule,
     BrowserAnimationsModule
   ],
-  entryComponents: [DialogContentExampleDialog],
+  entryComponents: [DialogContentExampleDialog, DialogContentExampleDialogItem],
   providers: [SignupService, ProfileService],
   bootstrap: [AppComponent]
 })
