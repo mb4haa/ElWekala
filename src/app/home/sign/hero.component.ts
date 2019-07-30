@@ -19,6 +19,7 @@ export class HeroComponent implements OnInit, OnDestroy {
   }
 
 
+
   openDialog() {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
@@ -66,7 +67,6 @@ export class DialogContentExampleDialog {
     this.reader.readAsDataURL(event.target.files[0]);
     this.reader.onload = (ev) => {
       this.url = ev.target.result;
-      console.log(this.url);
     };
   }
 

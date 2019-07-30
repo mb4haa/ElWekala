@@ -31,7 +31,10 @@ import { hwhComponent } from './home/hwh/hwh.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NewsComponent } from './news/news.component';
 import { itemCardComponent } from './news/itemCard/itemCard.component';
+<<<<<<< HEAD
 import { SignupService } from './signup.service';
+=======
+>>>>>>> 5ccfa605f8c9b472e5500dbd494832596059fd14
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -58,6 +61,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     MatDialogModule,
     HttpClientModule,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5ccfa605f8c9b472e5500dbd494832596059fd14
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule

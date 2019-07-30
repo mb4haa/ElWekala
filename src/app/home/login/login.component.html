@@ -3,7 +3,7 @@
     <div class="login-header">
       <h3></h3>
 </div>
-<mat-card>
+<mat-card class="loginHeader">
     <mat-spinner *ngIf="isLoading"></mat-spinner>
     <form (submit)="onLogin(loginForm)" #loginForm="ngForm"  *ngIf="!isLoading">
         <mat-form-field>
