@@ -1,0 +1,15 @@
+<div class="hiw">
+  <h2> How it Works</h2>
+  <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" (click)="onWho()" class="btn btn-secondary" >Seller</button>
+      <button type="button" (click)="onWho()" class="btn btn-secondary">Buyer</button>
+  </div>
+  <div id="hiw-container">
+    <span class="seller" *ngIf="!who">
+        <img  src='../../../assets/imgs/seller.png' alt="image">
+    </span>
+    <span class="buyer" *ngIf="who">
+        <img  src='../../../assets/imgs/buyer.png' alt="image">
+    </span>
+  </div>
+</div>

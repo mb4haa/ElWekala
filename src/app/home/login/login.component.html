@@ -1,0 +1,26 @@
+<!-- <textarea rows="6" [value]="newPost" #postInput></textarea> -->
+<div class="login">
+    <div class="login-header">
+      <h3></h3>
+</div>
+<mat-card class="loginHeader">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form (submit)="onLogin(loginForm)" #loginForm="ngForm"  *ngIf="!isLoading">
+        <mat-form-field>
+            <input matInput
+            type="email"
+            name="email"
+            ngModel
+            placeholder="E-MAIL" #emailInput="ngModel" required email>
+            <mat-error *ngIf="emailInput.invalid">Please enter a valid email</mat-error>
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+              <input name="password" ngModel type="password" matInput placeholder="Password" #passwordInput="ngModel" required >
+            <mat-error *ngIf="passwordInput.invalid">Please enter a valid passwprd</mat-error>
+            </mat-form-field>
+            <br/>
+            <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading">Login</button>
+          </form>
+    </mat-card>
+
