@@ -9,8 +9,11 @@ const http = require ('http');
 const postRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
 const prodrRoutes = require('./routes/product');
+const filterRouter = require('./routes/filters');
 
 const app = express();
+
+
 
 
 // const io = socket(app);
@@ -31,7 +34,6 @@ mongoose.connect("mongodb://admin:uqGqJcxGQ8AQbcg@ds347467.mlab.com:47467/el-wek
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-
 app.use((req,res,next) => {
   res.setHeader("Access-Control-Allow-Origin","http://localhost:4200"); // http://localhost:4200  http://distant-office-hours.s3-website.us-east-2.amazonaws.com
   res.header("Access-Control-Allow-Credentials", true);
@@ -43,6 +45,7 @@ app.use((req,res,next) => {
 app.use('/api/posts',postRoutes);
 app.use('/api/user',userRoutes);
 app.use('/api/product',prodrRoutes);
+app.use('/api/filter', filterRouter);
 // app.use('/api/user',signalRoutes);
 // --------------------------SIGNALING--------------------------------------------------------------
 

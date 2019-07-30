@@ -7,6 +7,7 @@ const checkAuth = require('../middleware/check-auth');
 const router = express.Router();
 
 router.post("/signup", (req, res, next) => {
+  console.log(1);
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
@@ -14,6 +15,8 @@ router.post("/signup", (req, res, next) => {
         lastName: req.body.lastName,
         email: req.body.email,
         password: hash,
+        gender: req.body.gender,
+        size: req.body.size,
         following: [],
         followers: [],
         listings: [],
@@ -24,13 +27,13 @@ router.post("/signup", (req, res, next) => {
       console.log(user)
       user.save()
         .then(result => {
-          res.status(201).json({
+          return res.status(201).json({
             message: 'User Created!',
             result: result
           });
         })
         .catch(err => {
-          res.status(500).json({
+          return res.status(500).json({
             message: err
           });
         });
@@ -58,7 +61,8 @@ router.post('/login', (req, res, next) => {
             return res.status(200).json({
               token: token,
               expiresIn: '4h',
-              id: fetchedUser._id
+              id: fetchedUser._id,
+              user:fetchedUser
             });
           }
           else if (!res2) {

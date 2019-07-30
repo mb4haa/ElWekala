@@ -28,12 +28,12 @@ import { BrandComponent } from './home/brand/brand.component';
 import { footerComponent } from './footer/footer.component';
 import {DialogContentExampleDialog} from './home/sign/hero.component';
 import { hwhComponent } from './home/hwh/hwh.component';
-
 import { ProfileComponent } from './profile/profile.component';
-
 import { NewsComponent } from './news/news.component';
 import { itemCardComponent } from './news/itemCard/itemCard.component';
 import { ProfileItemCardComponent } from './profile/profile-item-card/profile-item-card.component';
+import { SignupService } from './signup.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -57,13 +57,13 @@ import { ProfileItemCardComponent } from './profile/profile-item-card/profile-it
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule
   ],
   entryComponents: [DialogContentExampleDialog],
-  providers: [],
+  providers: [SignupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
