@@ -7,7 +7,7 @@
         user name + "has posted a listing!"
       </div>
       <div class="card-body">
-        <img src="../../../assets/imgs/KeenSmall.png" class="card-img-top" alt="...">
+        <img [src]="card.image" class="card-img-top" alt="...">
         <h5 class="card-title">{{card.name}}</h5>
         <p class="card-text">{{card.price}} | {{card.size}} | Brand</p>
       </div>

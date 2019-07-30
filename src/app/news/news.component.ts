@@ -93,11 +93,13 @@ export class DialogContentExampleDialogItem {
       finalTags.push(element['displayValue'])
     });
     let user:any = localStorage.getItem('user')
-    console.log(localStorage.getItem('uid'))
-    this.http.post(this.BACKEND_URL+"/addProduct",{token:localStorage.getItem('token'),category:finalTags,size:this.size, condition: this.condition, price: this.price, name: this.name, image: 'img',sellerName:localStorage.getItem('name'),sellerEmail:localStorage.getItem('email'),uid:localStorage.getItem('uid')})
+    console.log(this.url)
+    this.http.post(this.BACKEND_URL+"/addProduct",{token:localStorage.getItem('token'),category:finalTags,size:this.size, condition: this.condition, price: this.price, name: this.name, image:this.url,sellerName:localStorage.getItem('name'),sellerEmail:localStorage.getItem('email'),uid:localStorage.getItem('uid')})
     .subscribe((response) => {
       console.log(response);
 
+    },err => {
+      alert(err);
     })
   }
 

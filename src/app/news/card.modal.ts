@@ -7,5 +7,6 @@ export interface Card {
     name: string;
     price: number;
     seller: string;
+    image: string;
     // email: string;
   }
