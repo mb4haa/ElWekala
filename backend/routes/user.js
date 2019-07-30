@@ -41,7 +41,6 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-  console.log(req);
   let fetchedUser;
   User.findOne({ email: req.body.email })
     .then(user => {
@@ -51,7 +50,6 @@ router.post('/login', (req, res, next) => {
         });
       }
       else {
-        console.log(req);
         fetchedUser = user;
         passwordBoolean = bcrypt.compare(req.body.password, user.password, function (err, res2) {
           if (res2) {
@@ -63,7 +61,8 @@ router.post('/login', (req, res, next) => {
             return res.status(200).json({
               token: token,
               expiresIn: '4h',
-              id: fetchedUser._id
+              id: fetchedUser._id,
+              user:fetchedUser
             });
           }
           else if (!res2) {

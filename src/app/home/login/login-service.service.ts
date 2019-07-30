@@ -24,11 +24,12 @@ loginUser(email: string, password: string) {
       'Content-Type': 'application/json'
     }
   };
-  this.http.post<{token: string, expiresIn: number}>( 'http://localhost:3000/api/user/login', {email, password} )
+  this.http.post<{token: string, expiresIn: number,user: any}>( 'http://localhost:3000/api/user/login', {email, password} )
     .subscribe(response => {
       console.log(response);
       const token = response.token;
       this.token = token;
+      var name = response.user.firstName + " " + response.user.lastName
       if (token) {
       const expiresInDuration = response.expiresIn;
     //   this.setAuthTimer(expiresInDuration);
@@ -36,8 +37,10 @@ loginUser(email: string, password: string) {
     //   this.authStatusListener.next(true);
       const now = new Date();
       const expirationDate = new Date (now.getTime() + expiresInDuration * 1000);
-      console.log(expirationDate);
+      console.log(name);
       console.log(token);
+      localStorage.setItem("token",token)
+      localStorage.setItem("Name",name)
     //   this.saveAuthData(token, expirationDate);
       this.router.navigate(['/news']);
       }
