@@ -34,7 +34,8 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService, private http: HttpClient) { }
 
   ngOnInit() {
-    localStorage.setItem('otherId', '5d40a28a2863273a4c4b11b8');
+    // localStorage.setItem('otherId', '5d40a28a2863273a4c4b11b8');
+    localStorage.removeItem('otherId');
     if (localStorage.getItem('otherId')) {
       this.ownProfile = false;
       this.loadProfile(localStorage.getItem('otherId'));
