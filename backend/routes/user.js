@@ -100,6 +100,19 @@ router.patch('/viewProfile', (req, res, next) => {
     });
 });
 
+router.patch("/getUserById", (req, res, err) => {
+  User.findById(req.body._id).then(user => {
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found ' + req.body._id
+      });
+    }
+    res.status(200).json({
+      user: user
+    });
+  });
+});
+
 router.patch("/editProfile", checkAuth, (req, res, next) => {
   User.findById(req.body._id).then(user => {
     if (!user) {
@@ -330,44 +343,44 @@ router.patch('/viewListings', (req, res, next) => {
   })
 });
 
-router.patch('/setPrefs',checkAuth,(req,res,next) =>{
+router.patch('/setPrefs', checkAuth, (req, res, next) => {
   basePrefs = req.body.prefs
   arr = basePrefs.split(",")
   console.log(arr)
-  User.findById(req.body._id,function(err,foundUser){
-    if(err){
-      return res.status(401).json({message:err})
+  User.findById(req.body._id, function (err, foundUser) {
+    if (err) {
+      return res.status(401).json({ message: err })
     }
-    else{
+    else {
       console.log(foundUser)
       arr.forEach(element => {
         console.log(element)
-        if(foundUser.prefs == null){
+        if (foundUser.prefs == null) {
           foundUser.prefs = []
         }
         foundUser.prefs.push(element)
       });
-      foundUser.save(function(err,user){
-        if(err){
+      foundUser.save(function (err, user) {
+        if (err) {
           return res.status(401).json({
             message: 'No users Found'
           })
-        }else{
-          return res.status(201).json({msg:user})
+        } else {
+          return res.status(201).json({ msg: user })
         }
       })
     }
   })
 })
 
-router.patch('/getPrefs',(req,res,next) =>{
-  User.findById(req.body._id,function(err,foundUser){
-    if(err){
-      return res.status(401).json({message:err})
+router.patch('/getPrefs', (req, res, next) => {
+  User.findById(req.body._id, function (err, foundUser) {
+    if (err) {
+      return res.status(401).json({ message: err })
     }
-    else{
+    else {
       console.log(foundUser.prefs)
-      return res.status(201).json({Prefs:foundUser.prefs})
+      return res.status(201).json({ Prefs: foundUser.prefs })
     }
   })
 })

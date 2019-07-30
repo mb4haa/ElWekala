@@ -11,7 +11,7 @@
               src="https://image.noelshack.com/fichiers/2017/38/2/1505775062-1505606859-portrait-1961529-960-720.jpg" />
           
           </div>
-          <h4 class="name">{{firstName}}  {{lastName}}</h4>
+          <h4 class="name">{{firstName}} {{lastName}}</h4>
           <div class="username">{{email}}</div>
           <div class="stats row">
             <div class="stat col-xs-4" style="padding-right: 50px;">
@@ -36,34 +36,57 @@
           </div>
         </div>
         <div class="right col-lg-8">
-          <ul class="nav">
-            <li>Listings</li>
-            <li>Shares</li>
-            <li>Followers</li>
-            <li>Following</li>
-          </ul>
-          <span *ngIf='!ownProfile' class="follow">Follow</span>
+          <mat-tab-group>
+            <mat-tab label="Listings">
+              <div class="row gallery">
+                <div class="col-md-4" *ngFor="let card of cards">
+                  <app-profile-item-card></app-profile-item-card>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Likes">
+              <div class="row gallery">
+                <div class="col-md-4" *ngFor="let like of likes">
+                  <app-profile-item-card></app-profile-item-card>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Shares">
+                <div class="row gallery">
+                    <div class="col-md-4" *ngFor="let share of shares">
+                      <app-profile-item-card></app-profile-item-card>
+                    </div>
+                  </div>
+            </mat-tab>
+            <mat-tab label="Followers">
+                <div class="row f-list">
+                    <div class="col-md-4" *ngFor="let share of shares">
+                      <span id="f-name">first +last name</span>
+                      <span id="f-username">first +last name</span>
+                      <button id="follow">Follow</button>
+                    </div>
+                  </div>
+            </mat-tab>
+            <mat-tab label="Following">
+
+            </mat-tab>
+          </mat-tab-group>
+          <span *ngIf='ownProfile' class="follow">Follow</span>
+          <!-- <ul class="nav">
+            <li (click)='onListings($event)'>Listings</li>
+            <li (click)='onShares($event)'>Shares</li>
+            <li (click)='onLikes($event)'>Likes</li>
+            <li (click)='onFollowers($event)'>Followers</li>
+            <li (click)='onFollowings($event)'>Following</li>
+          </ul> -->
+          <!-- <span *ngIf='!ownProfile' class="follow">Follow</span>
           <div class="row gallery">
-            <div class="col-md-4">
+            <div class="col-md-4" *ngFor="let card of cards">
               <app-profile-item-card></app-profile-item-card>
             </div>
-            <div class="col-md-4">
-              <app-profile-item-card></app-profile-item-card>
-            </div>
-            <div class="col-md-4">
-              <app-profile-item-card></app-profile-item-card>
-            </div>
-            <div class="col-md-4">
-              <app-profile-item-card></app-profile-item-card>
-            </div>
-            <div class="col-md-4">
-              <app-profile-item-card></app-profile-item-card>
-            </div>
-            <div class="col-md-4">
-              <app-profile-item-card></app-profile-item-card>
-            </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -16,7 +16,9 @@ import { MatInputModule,
   MatDialogTitle,
   MatButton,
   MatDialogModule,
-  MatIconModule} from '@angular/material';
+  MatIconModule,
+  MatTabGroup,
+  MatTabsModule} from '@angular/material';
 import {headerComponent} from './header/header.component';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,15 +38,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileService } from './profile.service';
 import { SignupService } from './signup.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { ItemDescComponent } from './item-desc/item-desc.component';
 import { NgxTagsInputModule } from 'ngx-tags-input';
-
 
 @NgModule({
   declarations: [
     AppComponent, headerComponent, HomeComponent, HeroComponent, LoginComponent, HiwComponent, BrandComponent,
-    footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent,ProfileComponent, ProfileItemCardComponent, ItemDescComponent,
-    DialogContentExampleDialogItem
+    footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent, ProfileComponent,
+    ProfileItemCardComponent, DialogContentExampleDialogItem, CheckoutComponent,ItemDescComponent
 
   ],
   imports: [
@@ -62,6 +64,7 @@ import { NgxTagsInputModule } from 'ngx-tags-input';
     MatButtonToggleModule,
     MatPaginatorModule,
     MatDatepickerModule,
+    MatTabsModule,
     MatNativeDateModule,
     MatDialogModule,
     HttpClientModule,
