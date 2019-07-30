@@ -19,17 +19,17 @@ constructor(private http: HttpClient, private router: Router) {}
 loginUser(email: string, password: string) {
 
   // const data  = JSON.stringify({email, password});
-  const config = {
+  const config = { 
     headers: {
       'Content-Type': 'application/json'
     }
   };
-  this.http.post<{token: string, expiresIn: number,user: any}>( 'http://localhost:3000/api/user/login', {email, password} )
+  this.http.post<{token: string, expiresIn: number, user: any}>( 'http://localhost:3000/api/user/login', {email, password} )
     .subscribe(response => {
       console.log(response);
       const token = response.token;
       this.token = token;
-      var name = response.user.firstName + " " + response.user.lastName
+      const name = response.user.firstName + ' ' + response.user.lastName;
       if (token) {
       const expiresInDuration = response.expiresIn;
     //   this.setAuthTimer(expiresInDuration);
@@ -39,8 +39,8 @@ loginUser(email: string, password: string) {
       const expirationDate = new Date (now.getTime() + expiresInDuration * 1000);
       console.log(name);
       console.log(token);
-      localStorage.setItem("token",token)
-      localStorage.setItem("Name",name)
+      localStorage.setItem('token', token);
+      localStorage.setItem('Name', name);
     //   this.saveAuthData(token, expirationDate);
       this.router.navigate(['/news']);
       }
@@ -50,4 +50,4 @@ loginUser(email: string, password: string) {
      });
   }
 }
-
+ 
