@@ -34,6 +34,7 @@ import { itemCardComponent } from './news/itemCard/itemCard.component';
 import { ProfileItemCardComponent } from './profile/profile-item-card/profile-item-card.component';
 import { SignupService } from './signup.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileService } from './profile.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule
   ],
   entryComponents: [DialogContentExampleDialog],
-  providers: [SignupService],
+  providers: [SignupService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

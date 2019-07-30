@@ -318,4 +318,28 @@ router.patch("/addToCart/:id", checkAuth, (req, res, next) => {
     })
   });
 
+  router.patch('/getListings', (req, res, err) => {
+    User.findById(req.body._id).then(user => {
+      if(!user){
+        return res.status(404).json({
+          message: "user not found"
+        });
+      }
+      else{
+        Product.find({seller: req.body._id}).then(products => {
+          if(!products){
+            return res.status(404).json({
+              message: 'No products'
+            });
+          }
+          else{
+            return res.status(201).json({
+              products: products
+            });
+          }
+        });
+      }
+    });
+  });
+
 module.exports = router;
