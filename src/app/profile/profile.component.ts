@@ -24,14 +24,17 @@ export class ProfileComponent implements OnInit {
   public shares = [];
   public followersProfs = [];
   public followingProfs = [];
-  public followerIds;
+  public followerIds = [];
   public followingIds;
   public sharesIds;
   public likesIds;
   public image;
+  isFollowing = "Follow";
+
   constructor(private profileService: ProfileService, private http: HttpClient) { }
 
   ngOnInit() {
+    localStorage.setItem('otherId', '5d40a28a2863273a4c4b11b8');
     if (localStorage.getItem('otherId')) {
       this.ownProfile = false;
       this.loadProfile(localStorage.getItem('otherId'));
@@ -41,18 +44,20 @@ export class ProfileComponent implements OnInit {
       this.loadProfile(localStorage.getItem('uid'));
 
     }
+    console.log(this.ownProfile);
 
   }
 
   loadProfile(id: string) {
     this.http.patch(environment.url + 'user/viewProfile', { _id: id }).subscribe(response => {
+      console.log(response);
       this.firstName = response['user'].firstName;
       this.lastName = response['user'].lastName;
       this.email = response['user'].email;
       this.image = response['user'].image;
-      this.followers = response['user'].followers.length ;
-      this.following = response['user'].following.length ;
-      this.listings = response['user'].listings.length ;
+      this.followers = response['user'].followers.length;
+      this.following = response['user'].following.length;
+      this.listings = response['user'].listings.length;
       this.followerIds = response['user'].followers;
       this.followingIds = response['user'].following;
       this.sharesIds = response['user'].retweets;
@@ -61,6 +66,12 @@ export class ProfileComponent implements OnInit {
       this.getProductsinLikes();
       this.getProductsinShares();
       this.getFollowers();
+      if (this.followerIds.includes(localStorage.getItem('uid'))) {
+        this.isFollowing = "Unfollow";
+      }
+      else {
+        this.isFollowing = "Follow";
+      }
       // this.getFollowing();
     })
   }
@@ -103,4 +114,17 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  onFollowDirect(event: any) {
+    
+    if (this.isFollowing == 'Follow') {
+      this.http.patch(environment.url + 'user/follow', { token: localStorage.getItem('token'), _id: localStorage.getItem('uid'), _otherId: localStorage.getItem('otherId') }).subscribe(res => {
+        this.isFollowing = "Unfollow";
+      })
+    }
+    else{
+      this.http.patch(environment.url + 'user/unfollow', { token: localStorage.getItem('token'), _id: localStorage.getItem('uid'), _otherId: localStorage.getItem('otherId') }).subscribe(res => {
+        this.isFollowing = "Follow";
+      })
+    }
+  }
 }
