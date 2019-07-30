@@ -32,9 +32,9 @@ export class itemCardComponent implements OnInit, OnDestroy {
     //   this.card = postData.posts;
     //   console.log("this.card.length");
     // } );
-    this.http.patch<{products: any}>(this.BACKEND_URL + '/getProducts', this.page).subscribe(res => {
+    this.http.patch<{products: any}>(this.BACKEND_URL + '/getProducts', {pageNumber: this.page}).subscribe(res => {
       this.cards = res['products'];
-      console.log(this.cards);
+     //console.log(this.cards);
     });
 
   }
@@ -43,8 +43,14 @@ export class itemCardComponent implements OnInit, OnDestroy {
     this.page++;
     console.log(this.page);
     console.log('scrolled down!!', ev);
-    this.http.patch<{products: any}>(this.BACKEND_URL + '/getProducts', this.page).subscribe(res => {
-      this.cards.concat(res['products']);
+    this.http.patch<{products: any}>(this.BACKEND_URL + '/getProducts', {pageNumber: this.page}).subscribe(res => {
+      let temp: Card[] = [];
+      temp = res['products']
+      console.log(temp)
+      temp.forEach(element => {
+        this.cards.push(element);
+      });
+      console.log(res);
       console.log(this.cards);
     });
     // add another 20 items
