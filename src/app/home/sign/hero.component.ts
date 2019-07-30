@@ -45,7 +45,7 @@ export class DialogContentExampleDialog {
 
 
   reader = new FileReader();
-  url = '';
+  url = '../../../assets/imgs/avatar.png';
   private firstName: string = '';
   private lastName: string = '';
   private email: string = '';
