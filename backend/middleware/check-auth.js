@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
   try{
-  console.log(req.headers.authorization)
-  const token = req.headers.authorization;
+  console.log(req.body.token)
+  const token = req.body.token;
   jwt.verify(token, 'secret_this_should_be_longer');
   next();
 } catch (error) {

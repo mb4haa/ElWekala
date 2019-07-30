@@ -22,17 +22,17 @@
 
       <div class="multi-group">
         <div class="form-group">
-            <label for="exampleFormControlSelect1">Condition</label>
-            <select class="form-control"  id="exampleFormControlSelect1">
-              <option  *ngFor="let condition of conditions" (keyup)="onCondition($event)" [value]="condition" >{{condition}} </option>
+            <label for="exampleFormControlSelect5">Condition</label>
+            <select class="form-control" (change)="onCondition($event)" id="exampleFormControlSelect5">
+              <option  *ngFor="let condition of conditions" [value]="condition" >{{condition}} </option>
             </select>
         </div>
       </div>
       <div class="multi-group">
         <div class="form-group">
             <label for="exampleFormControlSelect2">Size</label>
-            <select class="form-control"  id="exampleFormControlSelect2">
-              <option  *ngFor="let size of sizes" (keyup)="onSize($event)" [value]="size" >{{size}} </option>
+            <select class="form-control" (change)="onSize($event)"  id="exampleFormControlSelect2">
+              <option  *ngFor="let size of sizes" [value]="size" >{{size}} </option>
             </select>
         </div>
       </div>
@@ -41,5 +41,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" (click)='onAdd($event)' cdkFocusInitial>Send</button>
+  <button mat-button [mat-dialog-close]="false" (click)='onAdd($event)' cdkFocusInitial>Send</button>
 </mat-dialog-actions>

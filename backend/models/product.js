@@ -8,7 +8,7 @@ const productSchema = mongoose.Schema({
     price: { type: Number, required: true },
     size: { type: String, enum: ['XS', 'Small', 'Medium', 'Large', 'XL', 'XXL'], default: 'Small' },
     condition: { type: String, enum: ['New', 'Used', 'Unspecified'], default: 'Unspecified' },
-    category: { type: String, enum: ['TBD'], default: 'TBD' },
+    category: { type: String, default: 'TBD' },
     date: { type: Date, default: Date.now },
     lastShare: { type: Date, default: Date.now },
     tags: { type: Array, required: true },

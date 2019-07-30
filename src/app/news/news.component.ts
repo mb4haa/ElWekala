@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -40,8 +40,8 @@ constructor(public dialog: MatDialog) {}
 export class DialogContentExampleDialogItem {
   name: string = ""
   price: Number = -1
-  condition: string = 'Unspecified';
-  size: string = 'Unknown';
+  condition: any = '';
+  size: any = '';
   conditions: string[] = ['Unspecified', 'New', 'Used'];
   sizes: string[] = ['Unknown', 'XS', 'Small', 'Medium', 'Large', 'XL', 'XXL'];
   tags: any = [];
@@ -67,29 +67,34 @@ export class DialogContentExampleDialogItem {
   }
   onName(event) {
     this.name = event.target.value;
+    console.log(this.name)
   }
 
-  onPrice(event: any) {
+  onPrice(event) {
     this.price = event.target.value;
+    console.log(this.price)
   }
 
-  onCondition(event: any) {
+  onCondition(event) {
     this.condition = event.target.value;
   }
 
-  onSize(event: any) {
+  onSize(event) {
     this.size = event.target.value;
+
   }
   onTagsChanged(event: any){
     //this.tags = event.target.value;
   }
-
+//
   onAdd(event: any) {
     let finalTags = []
     this.tags.forEach(element => {
       finalTags.push(element['displayValue'])
     });
-    this.http.post(this.BACKEND_URL+"/addProduct",{category:finalTags,size: this.size, condition: this.condition, price: this.price, name: this.name, img: 'img'})
+    let user:any = localStorage.getItem('user')
+    console.log(localStorage.getItem('uid'))
+    this.http.post(this.BACKEND_URL+"/addProduct",{token:localStorage.getItem('token'),category:finalTags,size:this.size, condition: this.condition, price: this.price, name: this.name, image: 'img',sellerName:localStorage.getItem('name'),sellerEmail:localStorage.getItem('email'),uid:localStorage.getItem('uid')})
     .subscribe((response) => {
       console.log(response);
 

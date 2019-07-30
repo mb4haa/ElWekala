@@ -103,10 +103,13 @@ export class DialogContentExampleDialog {
   }
 
   onGenderSelected(event: any) {
+    console.log(event.target.value)
+
     this.gender = event.target.value;
   }
 
   onSizeSelected(event: any) {
+    console.log(event.target.value)
     this.size = event.target.value;
   }
 }
