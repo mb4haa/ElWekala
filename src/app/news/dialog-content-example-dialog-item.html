@@ -10,81 +10,34 @@
     <form name='myForm'>
       <mat-form-field>
       
-              <!-- <label for="exampleFormControlInput1">First Name</label> -->
-              <input matInput type="text" (keyup)="onFirstName($event)" name="myName" ngModel class="form-control" #nameInput="ngModel" id="exampleFormControlInput1" placeholder="Name" required >
-              <mat-error *ngIf="nameInput.invalid">Please enter a valid name</mat-error>
-        </mat-form-field>
+        <!-- <label for="exampleFormControlInput1">First Name</label> -->
+        <input matInput type="text" name="myName" ngModel class="form-control" #nameInput="ngModel" id="exampleFormControlInput1" placeholder="Product Name" required >
+        <mat-error *ngIf="nameInput.invalid">Please enter a valid name</mat-error>
+      </mat-form-field>
       <mat-form-field>
-          <!-- <label for="exampleFormControlInput1">Last Name</label> -->
-          <input matInput type="text" name="LastName" (keyup)="onLastName($event)" ngModel class="form-control" #priceInput="ngModel" id="exampleFormControlInput1" placeholder="Price" required >
-          <mat-error *ngIf="LastInput.invalid">Field can't be empty</mat-error>
-        </mat-form-field>
+        <!-- <label for="exampleFormControlInput1">First Name</label> -->
+        <input matInput type="number" min="1" name="myName" ngModel class="form-control" #nameInput="ngModel" id="exampleFormControlInput1" placeholder="Product Price" required >
+        <mat-error *ngIf="nameInput.invalid">Please enter product price</mat-error>
+      </mat-form-field>
 
       <div class="multi-group">
         <div class="form-group">
-            <label for="exampleFormControlSelect1">Condition select</label>
-            <select class="form-control" (change)='onGenderSelected($event)' id="exampleFormControlSelect1">
-              <option *ngFor="let gender of genders" [value]="gender">
-                {{gender}}
-              </option>
+            <label for="exampleFormControlSelect1">Condition</label>
+            <select class="form-control"  id="exampleFormControlSelect1">
+              <option  *ngFor="let condition of conditions" [value]="condition" >{{condition}} </option>
             </select>
         </div>
-        <div class="form-group">
-              <label for="exampleFormControlSelect2">Size select</label>
-              <select class="form-control" (change)='onSizeSelected($event)' id="exampleFormControlSelect2">
-                  <option *ngFor="let size of sizes" [value]="size">
-                      {{size}}
-                  </option>
-              </select>
-          </div>
-        <div class="form-group">
-            <label for="exampleFormControlSelect2">Shoe Size Select</label>
-            <select multiple class="form-control" #mySelect (change)='onShoeSizeSelected(mySelect.value)' id="exampleFormControlSelect2">
-              <option>35</option>
-              <option>36</option>
-              <option>37</option>
-              <option>38</option>
-              <option>39</option>
-              <option>40</option>
-              <option>41</option>
-              <option>42</option>
-              <option>43</option>
-              <option>44</option>
-              <option>45</option>
-              <option>46</option>
-              <option>47</option>
-              <option>48</option>
-            </select>
-          </div>
       </div>
+      <div class="multi-group">
+        <div class="form-group">
+            <label for="exampleFormControlSelect2">Size</label>
+            <select class="form-control"  id="exampleFormControlSelect2">
+              <option  *ngFor="let size of sizes" [value]="size" >{{size}} </option>
+            </select>
+        </div>
+      </div>
+      <ngx-tags-input class="form-control input-lg tag" (onTagsChanged)="onTagsChanged($event)" [removeLastOnBackspace]="removeLastOnBackspace" [(ngModel)]="tags" name="tags" placeholder="Enter your tags here"></ngx-tags-input>
       </form>
-    <div class="multi-brands">
-      <h2>Choose your favourite brands</h2>
-      <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" (change)="checkValue(isChecked?'A':'B')" id="inlineCheckbox1" value="option1">
-          <img  src='../../../assets/imgs/Nike.png' alt="image"class="form-check-label" for="inlineCheckbox1">
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" (change)="checkValue1(isChecked?'A':'B')" id="inlineCheckbox2" value="option2">
-          <img  src='../../../assets/imgs/FredPerry.png' alt="image"class="form-check-label" for="inlineCheckbox2">
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" (change)="checkValue2(isChecked?'A':'B')" id="inlineCheckbox3" value="option3" >
-          <img  src='../../../assets/imgs/calvin.png' alt="image"class="form-check-label" for="inlineCheckbox3">
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" (change)="checkValue3(isChecked?'A':'B')" id="inlineCheckbox4" value="option4">
-            <img  src='../../../assets/imgs/concrete.png' alt="image"class="form-check-label" for="inlineCheckbox4">
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" (change)="checkValue4(isChecked?'A':'B')" id="inlineCheckbox5" value="option5">
-            <img  src='../../../assets/imgs/mobacco.png' alt="image"class="form-check-label" for="inlineCheckbox5">
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" (change)="checkValue5(isChecked?'A':'B')" id="inlineCheckbox6" value="option6" >
-            <img  src='../../../assets/imgs/daly.png' alt="image"class="form-check-label" for="inlineCheckbox6">
-          </div>
-      </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>

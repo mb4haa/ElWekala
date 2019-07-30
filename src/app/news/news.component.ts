@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
+
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
@@ -35,15 +36,13 @@ constructor(public dialog: MatDialog) {}
 })
 // tslint:disable-next-line:component-class-suffix
 export class DialogContentExampleDialogItem {
-  private gender = 'Rather not specify';
-  private size = 'Unknown';
-  private password = '';
-  genders: string[] = ['Rather not specify', 'Male', 'Female'];
+  condition: string = 'Unspecified';
+  size: string = 'Unknown';
+  conditions: string[] = ['Unspecified', 'New', 'Used'];
   sizes: string[] = ['Unknown', 'XS', 'Small', 'Medium', 'Large', 'XL', 'XXL'];
-
+  tags: any = [];
   reader = new FileReader();
   url = '../../../assets/imgs/avatar.png';
-
 
   constructor() { }
 
@@ -59,13 +58,7 @@ export class DialogContentExampleDialogItem {
       this.url = ev.target.result;
     };
   }
-  onGenderSelected(event: any) {
-    this.gender = event.target.value;
-  }
 
-  onSizeSelected(event: any) {
-    this.gender = event.target.value;
-  }
 
 
 
