@@ -39,8 +39,8 @@ loginUser(email: string, password: string) {
       const expirationDate = new Date (now.getTime() + expiresInDuration * 1000);
       console.log(name);
       console.log(token);
-      localStorage.setItem('token', token);
-      localStorage.setItem('Name', name);
+      localStorage.setItem('token', token)
+      localStorage.setItem('name', name)
     //   this.saveAuthData(token, expirationDate);
       this.router.navigate(['/news']);
       }
