@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema({
     retweets: { type: Array, required: true },
     prefs: { type: Array, required: true },
     cart: { type: Array, required: true },
+    image: {type: String, required: true},
     gender: { type: String, enum: ['Female', 'Male', 'Rather not specify'], default: 'Rather not specify' },
     size: {type: String, enum: ['XS', 'Small', 'Medium', 'Large', 'XL', 'XXL', 'Unknown'], default: 'Unknown'}
 });

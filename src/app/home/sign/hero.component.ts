@@ -98,7 +98,8 @@ export class DialogContentExampleDialog {
       gender: this.gender,
       size: this.size,
       password: this.password,
-      email: this.email
+      email: this.email,
+      image: this.url
     });
   }
 

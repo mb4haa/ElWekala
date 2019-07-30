@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
   public followingIds;
   public sharesIds;
   public likesIds;
+  public image;
   constructor(private profileService: ProfileService, private http: HttpClient) { }
 
   ngOnInit() {
@@ -38,6 +39,7 @@ export class ProfileComponent implements OnInit {
     else {
       this.ownProfile = true;
       this.loadProfile(localStorage.getItem('uid'));
+
     }
 
   }
@@ -47,9 +49,10 @@ export class ProfileComponent implements OnInit {
       this.firstName = response['user'].firstName;
       this.lastName = response['user'].lastName;
       this.email = response['user'].email;
-      this.followers = response['user'].followers.length - 1;
-      this.following = response['user'].following.length - 1;
-      this.listings = response['user'].listings.length - 1;
+      this.image = response['user'].image;
+      this.followers = response['user'].followers.length ;
+      this.following = response['user'].following.length ;
+      this.listings = response['user'].listings.length ;
       this.followerIds = response['user'].followers;
       this.followingIds = response['user'].following;
       this.sharesIds = response['user'].retweets;
@@ -69,7 +72,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getProductsinLikes() {
-    for (var i = 1; i < this.likesIds.length; i++) {
+    for (var i = 0; i < this.likesIds.length; i++) {
       this.http.patch(environment.url + 'product/getProductById', { _id: this.likesIds[i] }).subscribe(response => {
         this.likes.push(response['product']);
       })
@@ -77,7 +80,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getProductsinShares() {
-    for (var i = 1; i < this.sharesIds.length; i++) {
+    for (var i = 0; i < this.sharesIds.length; i++) {
       this.http.patch(environment.url + 'product/getProductById', { _id: this.sharesIds[i] }).subscribe(response => {
         this.shares.push(response['product']);
       })
@@ -85,7 +88,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getFollowers() {
-    for (var i = 1; i < this.followerIds.length; i++) {
+    for (var i = 0; i < this.followerIds.length; i++) {
       this.http.patch(environment.url + 'user/getUserById', { _id: this.followerIds[i] }).subscribe(response => {
         this.followersProfs.push(response['user']);
       })
@@ -93,7 +96,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getFollowing() {
-    for (var i = 1; i < this.followingIds.length; i++) {
+    for (var i = 0; i < this.followingIds.length; i++) {
       this.http.patch(environment.url + 'user/getUserById', { _id: this.followingIds[i] }).subscribe(response => {
         this.followingProfs.push(response['user']);
       })
