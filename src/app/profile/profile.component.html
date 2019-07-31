@@ -38,16 +38,16 @@
           <mat-tab-group>
             <mat-tab label="Listings">
               <div class="row gallery">
-                <div class="col-md-4" *ngFor="let card of cards">
-                    <div ng-app class="card" style.background-image="url({{card.image}})">
-                        <div class="controls">
-                          <div class="icon-container">
-                            <mat-icon class="icon">favorite</mat-icon>
-                            <mat-icon class="icon">autorenew</mat-icon>
-                            <mat-icon class="icon">share</mat-icon>
-                          </div>
-                        </div>
-                      </div>  
+                <div class="col-md-4 mr30" *ngFor="let card of cards">
+                  <div ng-app class="card mr30" style.background-image="url({{card.image}})">
+                    <div class="controls">
+                      <div class="icon-container">
+                        <mat-icon class="icon">favorite</mat-icon>
+                        <mat-icon class="icon">autorenew</mat-icon>
+                        <mat-icon class="icon">share</mat-icon>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </mat-tab>
@@ -83,20 +83,27 @@
             </mat-tab>
             <mat-tab label="Followers">
               <div class="row f-list">
-                <div class="col-md-4" *ngFor="let follower of followersProfs">
-                  <span id="f-name">{{follower.firstName}} </span>
+                <div class="fcard" *ngFor="let follower of followersProfs">
+                  <div class="fcard-detail">
+                  <span id="f-name">{{follower.firstName}}+{{follower.lastName}}</span>
                   <span id="f-username">{{follower.lastName}}</span>
-
+                </div>
+                <div class="fcard-action">
                   <button id="follow">Follow</button>
+                </div>
                 </div>
               </div>
             </mat-tab>
             <mat-tab label="Following">
                 <div class="row f-list">
-                    <div class="col-md-4" *ngFor="let following of followingProfs">
+                    <div class="fcard" *ngFor="let following of followingProfs">
+                        <div class="fcard-detail">
                       <span id="f-name">{{following.firstName}} </span>
                       <span id="f-username">{{following.lastName}}</span>
+                        </div>
+                        <div class="fcard-action">
                       <button id="follow">Follow</button>
+                        </div>
                     </div>
                   </div>
             </mat-tab>
