@@ -1,109 +1,96 @@
 <div class="filter-container">
     <div class="form-check" align="left">
-    <h1>Tags</h1>
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            Nike
-        </label>
+        <h1>Tags</h1>
+        <div>
+            <input class="form-check-input" type="checkbox" value="Summer" id="defaultCheck2" checked (change)='onCheckbox($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                Summer
+            </label>
+        </div>
+
+        <div>
+            <input class="form-check-input" type="checkbox" value="Winter" id="defaultCheck2" checked (change)='onCheckbox($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                Winter
+            </label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="Formal" id="defaultCheck2" checked (change)='onCheckbox($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                Formal
+            </label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="Casual" id="defaultCheck2" checked (change)='onCheckbox($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                Casual
+            </label>
+        </div>
+    </div>
+    <div class="form-check" align="left">
+        <h1>Condition</h1>
+        <div>
+            <input class="form-check-input" type="checkbox" value="Used" id="defaultCheck2" checked (change)='onCheckboxCondition($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                Used
+            </label>
+        </div>
+
+        <div>
+            <input class="form-check-input" type="checkbox" value="New" id="defaultCheck2" checked (change)='onCheckboxCondition($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                New
+            </label>
+        </div>
+    </div>
+    <div class="form-check" align="left">
+        <h1>Size</h1>
+        <div>
+            <input class="form-check-input" type="checkbox" value="XS" id="defaultCheck2" checked (change)='onCheckboxSize($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                XS
+            </label>
+        </div>
+
+        <div>
+            <input class="form-check-input" type="checkbox" value="Small" id="defaultCheck2" checked (change)='onCheckboxSize($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                Small
+            </label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="Medium" id="defaultCheck2" checked (change)='onCheckboxSize($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                Medium
+            </label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="Large" id="defaultCheck2" checked (change)='onCheckboxSize($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                Large
+            </label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="XL" id="defaultCheck2" checked (change)='onCheckboxSize($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                XL
+            </label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="XXL" id="defaultCheck2" checked (change)='onCheckboxSize($event)'>
+            <label class="form-check-label" for="defaultCheck2">
+                XXL
+            </label>
+        </div>
     </div>
 
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            Addidas
-        </label>
-    </div>
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            Mobaco
-        </label>
-    </div>
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            Summer
-        </label>
-    </div>
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            Winter
-        </label>
-    </div>
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            Sports Wear
-        </label>
-    </div>
-</div>
-
-<div class="form-check" align="left">
-    <h1>Condition</h1>
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            Old
-        </label>
-    </div>
-
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            New
-        </label>
-    </div>
-</div>
-<div class="form-check" align="left">
-    <h1>Size</h1>
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            XS
-        </label>
-    </div>
-
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            Small
-        </label>
-    </div>
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            Medium
-        </label>
-    </div>
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            Large
-        </label>
-    </div>
-    <div>
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-        <label class="form-check-label" for="defaultCheck2">
-            XL
-        </label>
-    </div>
-</div>
-
-    <div class="form-check" align="left" >
-        <h1>Max Price</h1>
-        <mat-slider
-            thumbLabel
-            [displayWith]="formatLabel"
-            tickInterval="10"
-            min="1"
-            max="9999"></mat-slider>
+    <div class="form-check" align="left">
+        <h1>Budget</h1>
+        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="10" (input)="pitch($event)" min="1" max="9999">
+        </mat-slider>
     </div>
 
     <div class="form-check-1" align="center">
-        <button class="btn-secondary">Apply Filters</button>
+        <button class="btn-secondary" (click)="onApplyFilters()">Apply Filters</button>
     </div>
 </div>
-    
-

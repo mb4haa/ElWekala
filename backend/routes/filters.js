@@ -4,7 +4,7 @@ const router = express.Router();
 const Product = require('../models/product');
 const User = require('../models/user');
 
-router.get('/filter', (req, res, next) => {
+router.patch('/filter', (req, res, next) => {
     Product.find({
         size: {$in: req.body.size.split(',')},
         price: {$gte: req.body.lowerBound, $lte: req.body.upperBound},
@@ -17,9 +17,8 @@ router.get('/filter', (req, res, next) => {
                 message: 'No products Found'
             })
         }
-        filtered = products;
         res.status(201).json({
-            products: filtered
+            products: products
         });
     })
 });
