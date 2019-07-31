@@ -114,7 +114,7 @@ router.patch("/likeProduct/:id", checkAuth, (req, res, next) => {
                   if (err) {
                     return res.status(401).json({ message: err })
                   } else {
-                    return res.status(200).json({ message: "Product updated" })
+                    return res.status(200).json({ message: "Product updated",user:MyUser })
                   }
                 })
               }
