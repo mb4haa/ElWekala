@@ -15,6 +15,7 @@ import { DisplayUsersComponent } from './display-users/display-users.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'users', component: DisplayUsersComponent},
   {path: 'news', component: NewsComponent},
   {path: 'item-desc', component: ItemDescComponent},
   {path: 'checkout', component: CheckoutComponent},
