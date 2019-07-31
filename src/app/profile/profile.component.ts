@@ -68,6 +68,7 @@ export class ProfileComponent implements OnInit {
       this.getProductsinLikes();
       this.getProductsinShares();
       this.getFollowers();
+      this.getFollowing();
       if (this.followerIds.includes(localStorage.getItem('uid'))) {
         this.isFollowing = "Unfollow";
       }

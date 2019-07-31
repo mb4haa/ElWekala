@@ -59,15 +59,21 @@
             </mat-tab>
             <mat-tab label="Followers">
               <div class="row f-list">
-                <div class="col-md-4" *ngFor="let share of shares">
-                  <span id="f-name">first +last name</span>
-                  <span id="f-username">first +last name</span>
+                <div class="col-md-4" *ngFor="let follower of followersProfs">
+                  <span id="f-name">{{follower.firstName}} </span>
+                  <span id="f-username">{{follower.lastName}}</span>
                   <button id="follow">Follow</button>
                 </div>
               </div>
             </mat-tab>
             <mat-tab label="Following">
-
+                <div class="row f-list">
+                    <div class="col-md-4" *ngFor="let following of followingProfs">
+                      <span id="f-name">{{following.firstName}} </span>
+                      <span id="f-username">{{following.lastName}}</span>
+                      <button id="follow">Follow</button>
+                    </div>
+                  </div>
             </mat-tab>
           </mat-tab-group>
 
