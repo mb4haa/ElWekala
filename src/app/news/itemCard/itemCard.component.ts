@@ -46,7 +46,7 @@ export class itemCardComponent implements OnInit, OnDestroy {
     this.http.patch<{}>(this.BACKEND_URL + '/likeProduct/'+pid, {token:localStorage.getItem('token'),uid:localStorage.getItem('uid')}).subscribe(res => {
       if(res['message']=='Product updated'){
         this.cards.forEach(element => {
-          if(element._id == pid){
+          if(element._id === pid){
             element.likes+=1;
           }
         });
@@ -57,7 +57,7 @@ export class itemCardComponent implements OnInit, OnDestroy {
   unrate(pid: any){
     let id = localStorage.getItem('uid')
     this.http.patch<{}>(this.BACKEND_URL + '/unlikeProduct/'+pid, {token:localStorage.getItem('token'),uid:localStorage.getItem('uid')}).subscribe(res => {
-      if(res['message']=='Product updated'){
+      if(res.message=='Product updated'){
         this.cards.forEach(element => {
           if(element._id == pid){
             element.likes-=1;
@@ -73,14 +73,29 @@ export class itemCardComponent implements OnInit, OnDestroy {
     console.log(this.likes)
   }
 
+  onBuy(pid: any) {
+    const id = localStorage.getItem('uid');
+    console.log(pid);
+    this.http.patch<{}>(this.BACKEND_URL + '/addToCart/' + pid, {token: localStorage.getItem('token'), uid: localStorage.getItem('uid')})
+    .subscribe(res => {
+      console.log(res);
+      const cart = localStorage.getItem('cart');
+      const newCart = cart + ',' + pid;
+      localStorage.setItem('cart', newCart);
+      alert('Added to cart');
+    }, err => {
+      alert('Already in cart');
+    });
+  }
+
   onScrollDown(ev) {
     this.page++;
     console.log(this.page);
     console.log('scrolled down!!', ev);
     this.http.patch<{products: any}>(this.BACKEND_URL + '/getProducts', {pageNumber: this.page}).subscribe(res => {
       let temp: Card[] = [];
-      temp = res['products']
-      console.log(temp)
+      temp = res.products
+      console.log(temp);
       temp.forEach(element => {
         this.cards.push(element);
       });

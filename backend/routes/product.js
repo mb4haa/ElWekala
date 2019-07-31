@@ -281,8 +281,11 @@ router.patch("/editProduct/:id", checkAuth, (req, res, next) => {
 });
 
 router.patch("/addToCart/:id", checkAuth, (req, res, next) => {
-    prodId = req.params.id
+  console.log('eheendjakndkjand');  
+  prodId = req.params.id
+    console.log(prodId);
     myId = req.body.uid
+    console.log(myId);
     User.findById(myId, function (err, MyUser) {
       if (MyUser) {
         if(!MyUser.cart.includes(prodId)){

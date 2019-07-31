@@ -45,7 +45,8 @@ loginUser(email: string, password: string) {
       localStorage.setItem('email', response.user.email)
       localStorage.setItem('uid',response.user._id);
       localStorage.setItem('user',response.user);
-//
+      localStorage.setItem('cart',response.user.cart);
+      console.log(localStorage.getItem('cart'));
     //   this.saveAuthData(token, expirationDate);
       this.router.navigate(['/news']).then(ev => {
         window.location.reload();
