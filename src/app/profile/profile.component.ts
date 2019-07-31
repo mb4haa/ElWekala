@@ -29,12 +29,14 @@ export class ProfileComponent implements OnInit {
   public sharesIds;
   public likesIds;
   public image;
+  public likeImage;
   isFollowing = "Follow";
 
   constructor(private profileService: ProfileService, private http: HttpClient) { }
 
   ngOnInit() {
-    localStorage.setItem('otherId', '5d40a28a2863273a4c4b11b8');
+    // localStorage.setItem('otherId', '5d40a28a2863273a4c4b11b8');
+    localStorage.removeItem('otherId');
     if (localStorage.getItem('otherId')) {
       this.ownProfile = false;
       this.loadProfile(localStorage.getItem('otherId'));
@@ -67,6 +69,7 @@ export class ProfileComponent implements OnInit {
       this.getProductsinLikes();
       this.getProductsinShares();
       this.getFollowers();
+      this.getFollowing();
       if (this.followerIds.includes(localStorage.getItem('uid'))) {
         this.isFollowing = "Unfollow";
       }
@@ -116,13 +119,13 @@ export class ProfileComponent implements OnInit {
   }
 
   onFollowDirect(event: any) {
-    
+
     if (this.isFollowing == 'Follow') {
       this.http.patch(environment.url + 'user/follow', { token: localStorage.getItem('token'), _id: localStorage.getItem('uid'), _otherId: localStorage.getItem('otherId') }).subscribe(res => {
         this.isFollowing = "Unfollow";
       })
     }
-    else{
+    else {
       this.http.patch(environment.url + 'user/unfollow', { token: localStorage.getItem('token'), _id: localStorage.getItem('uid'), _otherId: localStorage.getItem('otherId') }).subscribe(res => {
         this.isFollowing = "Follow";
       })

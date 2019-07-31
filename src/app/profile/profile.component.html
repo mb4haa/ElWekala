@@ -39,35 +39,65 @@
             <mat-tab label="Listings">
               <div class="row gallery">
                 <div class="col-md-4" *ngFor="let card of cards">
-                  <app-profile-item-card></app-profile-item-card>
+                  <div ng-app class="card" style.background-image="url({{card.image}})">
+                    <div class="controls">
+                      <div class="icon-container">
+                        <mat-icon class="icon">favorite</mat-icon>
+                        <mat-icon class="icon">autorenew</mat-icon>
+                        <mat-icon class="icon">share</mat-icon>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </mat-tab>
             <mat-tab label="Likes">
               <div class="row gallery">
                 <div class="col-md-4" *ngFor="let like of likes">
-                  <app-profile-item-card></app-profile-item-card>
+                    <div ng-app class="card" style.background-image="url({{like.image}})">
+                        <div class="controls">
+                          <div class="icon-container">
+                            <mat-icon class="icon">favorite</mat-icon>
+                            <mat-icon class="icon">autorenew</mat-icon>
+                            <mat-icon class="icon">share</mat-icon>
+                          </div>
+                        </div>
+                      </div>
                 </div>
               </div>
             </mat-tab>
             <mat-tab label="Shares">
               <div class="row gallery">
                 <div class="col-md-4" *ngFor="let share of shares">
-                  <app-profile-item-card></app-profile-item-card>
+                    <div ng-app class="card" style.background-image="url({{share.image}})">
+                        <div class="controls">
+                          <div class="icon-container">
+                            <mat-icon class="icon">favorite</mat-icon>
+                            <mat-icon class="icon">autorenew</mat-icon>
+                            <mat-icon class="icon">share</mat-icon>
+                          </div>
+                        </div>
+                      </div>
                 </div>
               </div>
             </mat-tab>
             <mat-tab label="Followers">
               <div class="row f-list">
-                <div class="col-md-4" *ngFor="let share of shares">
-                  <span id="f-name">first +last name</span>
-                  <span id="f-username">first +last name</span>
+                <div class="col-md-4" *ngFor="let follower of followersProfs">
+                  <span id="f-name">{{follower.firstName}} </span>
+                  <span id="f-username">{{follower.lastName}}</span>
                   <button id="follow">Follow</button>
                 </div>
               </div>
             </mat-tab>
             <mat-tab label="Following">
-
+                <div class="row f-list">
+                    <div class="col-md-4" *ngFor="let following of followingProfs">
+                      <span id="f-name">{{following.firstName}} </span>
+                      <span id="f-username">{{following.lastName}}</span>
+                      <button id="follow">Follow</button>
+                    </div>
+                  </div>
             </mat-tab>
           </mat-tab-group>
 
@@ -85,7 +115,7 @@
             </div>
           </div> -->
         </div>
-        <div *ngIf='!ownProfile' >
+        <div *ngIf='!ownProfile'>
           <button class="follow" (click)='onFollowDirect($event)'>{{isFollowing}}</button>
           <!-- <button class="unfollow" *ngIf='isFollowing' (click)='onUnFollowDirect($event)'>Unfollow</button> -->
         </div>
