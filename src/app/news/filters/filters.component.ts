@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-filters',
@@ -56,7 +57,8 @@ export class FiltersComponent implements OnInit {
       tags: this.tags,
       category: ''
      }).subscribe(res => {
-       console.log(res);
+       localStorage.setItem('filtered',JSON.stringify(res));
+       window.location.reload();
      })
   }
 
