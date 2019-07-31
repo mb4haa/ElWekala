@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit {
   public sharesIds;
   public likesIds;
   public image;
+  public likeImage;
   isFollowing = "Follow";
 
   constructor(private profileService: ProfileService, private http: HttpClient) { }
@@ -118,13 +119,13 @@ export class ProfileComponent implements OnInit {
   }
 
   onFollowDirect(event: any) {
-    
+
     if (this.isFollowing == 'Follow') {
       this.http.patch(environment.url + 'user/follow', { token: localStorage.getItem('token'), _id: localStorage.getItem('uid'), _otherId: localStorage.getItem('otherId') }).subscribe(res => {
         this.isFollowing = "Unfollow";
       })
     }
-    else{
+    else {
       this.http.patch(environment.url + 'user/unfollow', { token: localStorage.getItem('token'), _id: localStorage.getItem('uid'), _otherId: localStorage.getItem('otherId') }).subscribe(res => {
         this.isFollowing = "Follow";
       })
