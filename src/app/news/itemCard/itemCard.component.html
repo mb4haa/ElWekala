@@ -8,8 +8,10 @@
       </div>
       <div class="card-body">
         <img [src]="card.image" class="card-img-top" alt="...">
-        <h5 class="card-title">{{card.name}}</h5>
-        <p class="card-text">{{card.price}} | {{card.size}} | Brand</p>
+        <div class="card-detail">
+          <h5 class="card-title">{{card.name}}</h5>
+          <p class="card-text">{{card.price}} | {{card.size}} | Brand</p>
+        </div>
       </div>
       <div class="controls">
         <div class="icon-container">
@@ -22,13 +24,14 @@
             <a (click) = "unrate(card._id)"><mat-icon class="icon">favorite</mat-icon></a>
           </div>
           <div class="icons">
-              <p>{{card.shares}}</p>
+            <p>{{card.shares}}</p>
             <a (click) = "test(card._id)"><mat-icon class="icon">autorenew</mat-icon> </a>
           </div>
           <div class="icons">
             <mat-icon class="icon">share</mat-icon>
           </div>
         </div>
+      
         <div class="buy-btn-container">
           <a href="#" class="btn btn-primary">buy</a>
         </div>
