@@ -104,6 +104,11 @@ export class itemCardComponent implements OnInit, OnDestroy {
     });
   }
 
+  onDesc(pid) {
+    localStorage.setItem('desc', pid);
+    console.log(pid);
+  }
+
   onScrollDown(ev) {
     this.page++;
     console.log(this.page);
