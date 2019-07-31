@@ -15,7 +15,9 @@ const productSchema = mongoose.Schema({
     likes: { type: Number, default: 0 },
     sellerName:{type:String, required:true,default:''},
     sellerEmail:{type:String,required:true,default:''},
-    shares:{type:Number,default:0}
+    shares:{type:Number,default:0},
+    comments:{type:Array,default:[]},
+    description:{type:String,default:""}
 });
 
 productSchema.plugin(uniqueValidator);
