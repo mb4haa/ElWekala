@@ -339,6 +339,40 @@ router.patch("/addToCart/:id", checkAuth, (req, res, next) => {
       }
     })
   });
+  router.patch('/getProductComments/:id',checkAuth,(req,res,next)=>{
+    prodId = req.params.id
+    myId = req.body.uid
+    Product.findById(prodId,function(err,Product){
+      if(Product){
+        return res.status(201).json({comments:Product.comments})
+      }
+      else{
+        return res.status(401).json({message:"Product not found"})
+      }
+    })
+  })
+  router.post('/addComment/:id',checkAuth,(req,res,next)=>{
+    prodId = req.params.id
+    myId = req.body.uid
+    commenter = req.body.name
+    comment = req.body.comment
+    full = commenter + "," + comment
+    Product.findById(prodId,function(err,Product){
+      if(Product){
+        Product.comments.push(full)
+        Product.save(function(err,Saved){
+          if(Saved){
+            return res.status(201).json({message:"Comment added",Product:Product})
+          }else{
+            return res.status(401).json({message:'failed to save new commented product'})
+          }
+        })
+      }
+      else{
+        return res.status(401).json({message:"Product not found"})
+      }
+    })
+  })
 
   router.patch('/getListings', (req, res, err) => {
     User.findById(req.body._id).then(user => {

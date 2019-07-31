@@ -1,17 +1,23 @@
 <div class="item-section">
     <div class="left-side">
         <div class="photo-box">
-            <img src="../../assets/imgs/m_5b142c899519961cf530c620.jpg">
+            <img [src]="product.image">
         </div>
         <div class="stats">
             <div class="controls">
                 <div class="icon-container">
-                    <div class="icons">
-                        <p>{{card.likes}}</p>
-                        <mat-icon class="icon">favorite</mat-icon>
+                     <div class="icons" *ngIf = '!(likes.includes(product._id))'>
+                                <p>{{product.likes}}</p>
+                                <a (click) = "rate(product._id, product.likes)"><mat-icon class="icon">favorite_border</mat-icon></a>
+                                  </div>
+                                  <div class="icons" *ngIf = '(likes.includes(product._id))'>
+                                    <p>{{product.likes}}</p>
+                                    <a (click) = "unrate(product._id, product.likes)"><mat-icon class="icon">favorite</mat-icon></a>
+                                 
                      </div>
                     <div class="icons">
-                        <mat-icon class="icon">autorenew</mat-icon>
+                            <p>{{product.shares}}</p>
+                            <a (click) = "test(product._id)"><mat-icon class="icon">autorenew</mat-icon> </a>
                      </div>
                     <div class="icons">
                       <mat-icon class="icon">share</mat-icon>
@@ -22,33 +28,37 @@
                 <div class="display-comments">
                 </div>
                 <div class="write-comments"> 
-                    <img src="../../assets/imgs/Nike.png" id="comment-avatar">                                       
                     <form>
-                        <textarea>Leave something cute...</textarea>
-                    </form>           
-                    <button>Send</button>
+                            <textarea cols="30" rows="4"(change)="doTextareaValueChange($event)"></textarea>
+                        </form>
+                        <div class = 'buy'>           
+                    <button (click)="comment(product._id)">Comment</button>
+                </div>  
+                <div *ngFor="let final of finalArr">
+                <label for="comment">{{final.commenter}}</label>
+                <textarea placeholder="test" id="comment" disabled>{{final.comment}}</textarea>
+
+                </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
     <div class="right-side">
         <div class="user"></div>
         <div class="item">
-            <div class="title">Michael Kors White Basic Tee cutout</div>
-            <div class="brand">MICHEAL</div>
-            <div class="prices"><span id="after-price">$44</span><span id="before-price">$68</span></div>
+            <div class="title">{{product.name}}</div>
+            <div class="brand">{{product.brand}}</div>
+            <div class="prices"> 
+
+                <!-- <span id="after-price">$44</span> -->
+
+                <span >Price ${{product.price}}</span></div>
             <div class="descrip">
-                <span id="descrip-content">•NWT 
-                        •White cuffed sleeve Tee Shirt
-                        •Gold detail & cutout in the front
-                        •Size Medium
-                        •Approx 27.” Long
-                        •55% Cotton & 45% Modal
-                        •MSRP $68</span> 
+                <span id="descrip-content">•{{product.description}}</span> 
             </div>
         </div>
         <div class="buy">
-            <button>Buy Now</button>
+            <button (click)="onBuy(product._id)">Buy Now</button>
         </div>
     </div>
 </div>
