@@ -45,13 +45,14 @@ import { NgxTagsInputModule } from 'ngx-tags-input';
 import { FiltersComponent } from './news/filters/filters.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { FollowerInfoComponent } from './profile/follower-info/follower-info.component';
+import { DisplayUsersComponent } from './display-users/display-users.component';
 
 @NgModule({
   declarations: [
     AppComponent, headerComponent, HomeComponent, HeroComponent, LoginComponent, HiwComponent, BrandComponent,
     footerComponent, DialogContentExampleDialog, hwhComponent, NewsComponent, itemCardComponent, ProfileComponent,
     ProfileItemCardComponent, DialogContentExampleDialogItem, CheckoutComponent,ItemDescComponent, FiltersComponent
-    , DialogContentExampleDialogItem, ItemDescComponent, CheckoutComponent, FollowerInfoComponent
+    , DialogContentExampleDialogItem, ItemDescComponent, CheckoutComponent, FollowerInfoComponent, DisplayUsersComponent
 
   ],
   imports: [
