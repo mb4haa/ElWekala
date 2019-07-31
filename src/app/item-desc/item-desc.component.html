@@ -24,9 +24,9 @@
                 <div class="write-comments"> 
                     <img src="../../assets/imgs/Nike.png" id="comment-avatar">                                       
                     <form>
-                        <textarea>Leave something cute...</textarea>
-                    </form>           
-                    <button>Send</button>
+                            <textarea cols="30" rows="4"(change)="doTextareaValueChange($event)"></textarea>
+                        </form>           
+                    <button (click)="comment(product._id)">Send  </button>
                 </div>
             </div>
         </div>
