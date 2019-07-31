@@ -49,7 +49,7 @@ export class DialogContentExampleDialogItem {
   sizes: string[] = ['Unknown', 'XS', 'Small', 'Medium', 'Large', 'XL', 'XXL'];
   tags: any = [];
   reader = new FileReader();
-  url = '../../../assets/imgs/avatar.png';
+  url = '../../../assets/imgs/laundry.png';
   BACKEND_URL = environment.url + 'product';
 
 
