@@ -13,11 +13,17 @@ export class ItemDescComponent implements OnInit {
   product;
   likes;
   str:string;
+  comments;
+  userNames:any[] = [];
+  commentBodies:any[] = [];
+  finalComment:Comment[] = [];
+  testComment:Comment
+  finalArr = [];
   constructor(private http: HttpClient) { }
 //  
   ngOnInit() {
     const pid = localStorage.getItem('desc');
-    this.http.patch<{}>(this.BACKEND_URL + '/getProductById' , {_id: pid})
+    this.http.patch<{product:any}>(this.BACKEND_URL + '/getProductById', {_id: pid})
     .subscribe(res => {
       console.log(res.product);
       this.product = res.product;
@@ -25,9 +31,27 @@ export class ItemDescComponent implements OnInit {
       alert(err);
       console.log(err);
     });
-
+    const id = pid
     this.likes = (localStorage.getItem('likes').split(','));
+    this.http.patch<{comments:any}>(this.BACKEND_URL + '/getProductComments/'+id, {token:localStorage.getItem('token'),uid:localStorage.getItem('uid')})
+    .subscribe(res => {
 
+      console.log(res.comments);
+      this.comments = res.comments;
+
+      this.comments.forEach(element => {
+        console.log(element)
+        var arr = element.split(",") 
+        var t = {comment:arr[1],commenter:arr[0]} 
+        this.finalArr.push(t)
+        console.log(arr)
+        this.userNames.push(arr[0])
+        this.commentBodies.push(arr[1])
+      });
+    }, err => {
+      alert(err);
+      console.log(err);
+    });
   }
 
   onBuy(pid: any) {
@@ -83,9 +107,11 @@ export class ItemDescComponent implements OnInit {
   }
 comment(pid:any){
  // console.log(this.str)
- this.http.patch<{}>(this.BACKEND_URL + '/addComment  /'+pid, {id:localStorage.getItem('uid'),token:localStorage.getItem('token'),uid:localStorage.getItem('uid'),name:localStorage.getItem('name'),comment:this.str}).subscribe(res => {
+ this.http.post<{}>(this.BACKEND_URL + '/addComment/'+pid, {id:localStorage.getItem('uid'),token:localStorage.getItem('token'),uid:localStorage.getItem('uid'),name:localStorage.getItem('name'),comment:this.str}).subscribe(res => {
   if(res['message']=='Comment added'){
     console.log("AS")
+    this.str = ""
+    console.log(res['Product'])
   }
   else{
 

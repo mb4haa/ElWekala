@@ -28,25 +28,31 @@
                 <div class="display-comments">
                 </div>
                 <div class="write-comments"> 
-                    <img src="../../assets/imgs/Nike.png" id="comment-avatar">                                       
                     <form>
                             <textarea cols="30" rows="4"(change)="doTextareaValueChange($event)"></textarea>
-                        </form>           
-                    <button (click)="comment(product._id)">Send  </button>
+                        </form>
+                        <div class = 'buy'>           
+                    <button (click)="comment(product._id)">Comment</button>
+                </div>  
+                <div *ngFor="let final of finalArr">
+                <label for="comment">{{final.commenter}}</label>
+                <textarea placeholder="test" id="comment" disabled>{{final.comment}}</textarea>
+
+                </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
     <div class="right-side">
         <div class="user"></div>
         <div class="item">
             <div class="title">{{product.name}}</div>
             <div class="brand">{{product.brand}}</div>
-            <div class="prices">
+            <div class="prices"> 
 
                 <!-- <span id="after-price">$44</span> -->
 
-                <span id="before-price">${{product.price}}</span></div>
+                <span >Price ${{product.price}}</span></div>
             <div class="descrip">
                 <span id="descrip-content">•{{product.description}}</span> 
             </div>

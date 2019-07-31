@@ -339,7 +339,7 @@ router.patch("/addToCart/:id", checkAuth, (req, res, next) => {
       }
     })
   });
-  router.get('/getProductComments/:id',checkAuth,(req,res,next)=>{
+  router.patch('/getProductComments/:id',checkAuth,(req,res,next)=>{
     prodId = req.params.id
     myId = req.body.uid
     Product.findById(prodId,function(err,Product){
