@@ -85,8 +85,8 @@
               <div class="row f-list">
                 <div class="fcard" *ngFor="let follower of followersProfs">
                   <div class="fcard-detail">
-                  <span id="f-name">{{follower.firstName}}+{{follower.lastName}}</span>
-                  <span id="f-username">{{follower.lastName}}</span>
+                  <span id="f-name">{{follower.firstName}} {{follower.lastName}}</span>
+                  <!-- <span id="f-username">{{follower.lastName}}</span> -->
                 </div>
                 <div class="fcard-action">
                   <button id="follow">Follow</button>
@@ -98,8 +98,8 @@
                 <div class="row f-list">
                     <div class="fcard" *ngFor="let following of followingProfs">
                         <div class="fcard-detail">
-                      <span id="f-name">{{following.firstName}} </span>
-                      <span id="f-username">{{following.lastName}}</span>
+                      <span id="f-name">{{following.firstName}} {{following.lastName}}</span>
+                
                         </div>
                         <div class="fcard-action">
                       <button id="follow">Follow</button>
