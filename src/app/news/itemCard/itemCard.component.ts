@@ -23,7 +23,7 @@ export class itemCardComponent implements OnInit, OnDestroy {
   scrollUpDistance = 2;
   direction = '';
   page = 0;
-  likes: any[] = []
+  likes;
 
 
   constructor(private NewsService: NewsServiceService, private http: HttpClient) { }
@@ -33,10 +33,12 @@ export class itemCardComponent implements OnInit, OnDestroy {
     //   this.card = postData.posts;
     //   console.log("this.card.length");
     // } );
-    if (localStorage.getItem('likes')) {
+    if (localStorage.getItem('likes')!=null) {
+      console.log("hena")
       this.likes = (localStorage.getItem('likes').split(","));
+      console.log(this.likes)
     }
-    console.log(typeof (this.likes))
+    console.log((this.likes))
     this.http.patch<{ products: any }>(this.BACKEND_URL + '/getProducts', { pageNumber: this.page }).subscribe(res => {
       this.cards = res['products'];
       // console.log(this.cards);
@@ -53,6 +55,7 @@ export class itemCardComponent implements OnInit, OnDestroy {
           }
         });
         this.likes.push(pid)
+        localStorage.setItem('likes',this.likes);
       }
     });
   }
@@ -67,12 +70,23 @@ export class itemCardComponent implements OnInit, OnDestroy {
         });
         const x = this.likes.indexOf(pid)
         this.likes.splice(x, 1)
+        localStorage.setItem('likes',this.likes);
       }
     });
   }
-  test(pid: any) {
-    this.likes = (localStorage.getItem('likes').split(","))
-    console.log(this.likes)
+  test(pid:any){
+    let id = localStorage.getItem('uid')
+    this.http.patch<{}>(this.BACKEND_URL + '/shareProduct/'+pid, {token:localStorage.getItem('token'),uid:localStorage.getItem('uid')}).subscribe(res => {
+      if(res['message']=='Product updated'){
+        this.cards.forEach(element => {
+          if(element._id == pid){
+            element.shares+=1;
+          }
+        });
+
+      }
+    });
+
   }
 
   onScrollDown(ev) {
